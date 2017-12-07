@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-11-29 11:37:39 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="housekeeper.entities.Family" table="FAMILY">
+
+		<id name="familyId" type="java.lang.Integer">
+			<column name="FAMILY_ID" />
+			<generator class="native" />
+		</id>
+
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+
+		<property name="password" type="java.lang.String">
+			<column name="PASSWORD" />
+		</property>
+
+		<property name="familyName" type="java.lang.String">
+			<column name="FAMILY_NAME" />
+		</property>
+
+
+
+	</class>
+</hibernate-mapping>

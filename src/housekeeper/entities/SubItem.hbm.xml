@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-11-29 11:48:01 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="housekeeper.entities.SubItem" table="SUBITEM">
+
+		<id name="subItemId" type="java.lang.Integer">
+			<column name="SUBITEM_ID" />
+			<generator class="native" />
+		</id>
+
+		<property name="subItemName" type="java.lang.String">
+			<column name="SUBITEM_NAME" />
+		</property>
+
+		<many-to-one name="item" class="housekeeper.entities.Item"
+			lazy="false">
+			<column name="ITEM_ID" />
+		</many-to-one>
+
+
+
+	</class>
+</hibernate-mapping>

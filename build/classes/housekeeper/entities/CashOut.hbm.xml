@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-11-29 11:50:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="housekeeper.entities.CashOut" table="CASHOUT">
+
+		<id name="cashOutId" type="java.lang.Integer">
+			<column name="CASHOUT_ID" />
+			<generator class="native" />
+		</id>
+
+		<property name="time" type="java.util.Date">
+			<column name="TIME" />
+		</property>
+
+		<property name="site" type="java.lang.String">
+			<column name="SITE" />
+		</property>
+
+		<property name="people" type="java.lang.String">
+			<column name="PEOPLE" />
+		</property>
+
+		<property name="money" type="double">
+			<column name="MONEY" />
+		</property>
+
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" />
+		</property>
+
+		<many-to-one name="member" class="housekeeper.entities.Member"
+			lazy="false">
+			<column name="MEMBER_ID" />
+		</many-to-one>
+
+		<many-to-one name="item" class="housekeeper.entities.Item"
+			lazy="false">
+			<column name="ITEM_ID" />
+		</many-to-one>
+
+		<many-to-one name="subItem" class="housekeeper.entities.SubItem"
+			lazy="false">
+			<column name="SUBITEM_ID" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>
