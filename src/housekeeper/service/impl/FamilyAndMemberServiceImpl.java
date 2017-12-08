@@ -11,6 +11,7 @@ import housekeeper.dao.MemberDao;
 import housekeeper.entities.Family;
 import housekeeper.entities.Member;
 import housekeeper.service.FamilyAndMemberService;
+import housekeeper.tools.Sha256;
 
 @Service
 public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
@@ -32,15 +33,15 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				username = "";
 			List<Family> family = familyDao.queryByUsername(username);
 			Family familyGet = family.get(0);
-			if (familyGet.getPassword().equals(password)) {
+			if (familyGet.getPassword().equals(Sha256.getSHA256StrJava(password))) {
 				return "SUCCESS";
 			} else {
-				// ÓÃ»§Ãû´íÎó
+				// å¯†ç é”™è¯¯
 				return "FAILED";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			// ÓÃ»§Ãû²»´æÔÚ
+			// ç”¨æˆ·åä¸å­˜åœ¨
 			return "ERROR";
 		}
 	}
@@ -52,15 +53,15 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				username = "";
 			List<Member> member = memberDao.queryByUsername(username);
 			Member memberGet = member.get(0);
-			if (memberGet.getPassword().equals(password)) {
+			if (memberGet.getPassword().equals(Sha256.getSHA256StrJava(password))) {
 				return "SUCCESS";
 			} else {
-				// ÓÃ»§Ãû´íÎó
+				// å¯†ç é”™è¯¯
 				return "FAILED";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			// ÓÃ»§Ãû²»´æÔÚ
+			// ç”¨æˆ·åä¸å­˜åœ¨
 			return "ERROR";
 		}
 	}
@@ -77,12 +78,12 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 			if (username != "" && password != ""
 					&& familyName != "" & familyDao.queryByUsername(username).size() == 0) {
 				family.setUsername(username);
-				family.setPassword(password);
+				family.setPassword(Sha256.getSHA256StrJava(password));
 				family.setFamilyName(familyName);
 				familyDao.save(family);
 				return "SUCCESS";
 			} else {
-				// ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ»òÌîÈë²ÎÊıÎª¿Õ
+				// ç”¨æˆ·åå·²è¢«æ³¨å†Œ
 				return "FAILED";
 			}
 		} catch (Exception e) {
@@ -109,7 +110,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 					&& memberDao.queryByUsername(username).size() == 0) {
 				family.setFamilyId(familyId);
 				member.setUsername(username);
-				member.setPassword(password);
+				member.setPassword(Sha256.getSHA256StrJava(password));
 				member.setName(name);
 				member.setRole(role);
 				member.setBalance(0.0);
@@ -117,7 +118,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				memberDao.save(member);
 				return "SUCCESS";
 			} else {
-				// ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ»òÌîÈë²ÎÊıÎª¿Õ
+				// ç”¨æˆ·åå·²è¢«æ³¨å†Œ
 				return "FAILED";
 			}
 		} catch (Exception e) {
@@ -166,7 +167,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				familyName = "";
 			if (password != "" && familyName != "" && id != null && familyDao.queryById(id).size() != 0) {
 				family.setFamilyName(familyName);
-				family.setPassword(password);
+				family.setPassword(Sha256.getSHA256StrJava(password));
 				family.setFamilyId(id);
 				familyDao.update(family);
 				return "SUCCESS";
@@ -193,7 +194,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 			if (password != "" && role != "" && id != null && name != "" && memberDao.queryById(id).size() != 0) {
 				member.setMemberId(id);
 				member.setBalance(balance);
-				member.setPassword(password);
+				member.setPassword(Sha256.getSHA256StrJava(password));
 				member.setRole(role);
 				member.setName(name);
 				memberDao.update(member);

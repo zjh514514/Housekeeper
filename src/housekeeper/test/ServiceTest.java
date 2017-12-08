@@ -43,11 +43,11 @@ public class ServiceTest {
 	}
 
 	/*
-	 * ²âÊÔFamilyAndMemberService
+	 * æµ‹è¯•FamilyAndMemberService
 	 */
 	@Test
 	public void testFamilySign() {
-		System.out.println(familyAndMemberService.familySign("cc", "cc", "cc"));
+		System.out.println(familyAndMemberService.familySign("abc", "abc123456", "è€ç‹å®¶"));
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class ServiceTest {
 
 	@Test
 	public void testFamilyLogin() {
-		System.out.println(familyAndMemberService.familyLogin("aa", "dd"));
+		System.out.println(familyAndMemberService.familyLogin("abc", "abc123456"));
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public class ServiceTest {
 	}
 
 	/*
-	 * ²âÊÔItemsService
+	 * ï¿½ï¿½ï¿½ï¿½ItemsService
 	 */
 	@Test
 	public void testItemsAddItems() {
@@ -144,7 +144,7 @@ public class ServiceTest {
 	}
 
 	/*
-	 * ²âÊÔCardService
+	 * ï¿½ï¿½ï¿½ï¿½CardService
 	 */
 	@Test
 	public void testAddCard() {
@@ -173,7 +173,7 @@ public class ServiceTest {
 	}
 
 	/**
-	 * ²âÊÔCashInAndCashOutService
+	 * ï¿½ï¿½ï¿½ï¿½CashInAndCashOutService
 	 */
 	@Test
 	public void testAddCashIn() {
