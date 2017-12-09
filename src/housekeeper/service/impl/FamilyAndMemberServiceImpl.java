@@ -37,7 +37,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				return "SUCCESS";
 			} else {
 				// 密码错误
-				return "FAILED";
+				return "ERROR";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 				return "SUCCESS";
 			} else {
 				// 密码错误
-				return "FAILED";
+				return "ERROR";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

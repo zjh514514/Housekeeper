@@ -10,7 +10,7 @@ public interface FamilyAndMemberService {
 	/**
 	 * 家庭登陆
 	 * 
-	 * @param username
+	 * @param username：长度六位
 	 * @param password
 	 * @return
 	 */
@@ -19,7 +19,7 @@ public interface FamilyAndMemberService {
 	/**
 	 * 成员登陆
 	 * 
-	 * @param username
+	 * @param username：长度三位
 	 * @param password
 	 * @return
 	 */
