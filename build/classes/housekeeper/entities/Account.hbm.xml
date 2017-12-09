@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-12-9 21:04:05 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+
+	<class name="housekeeper.entities.Account" table="ACCOUNT">
+
+		<id name="accountId" type="java.lang.Integer">
+			<column name="ACCOUNT_ID" />
+			<generator class="native" />
+		</id>
+
+		<property name="accountName" type="java.lang.String">
+			<column name="ACCOUNT_NAME" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

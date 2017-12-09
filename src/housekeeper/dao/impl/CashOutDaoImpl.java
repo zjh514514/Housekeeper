@@ -26,11 +26,12 @@ public class CashOutDaoImpl extends HibernateTools implements CashOutDao {
 
 	@Override
 	public void update(CashOut cashOut) {
-		hql = "UPDATE CashOut c SET c.time = ? , c.site = ? , c.people = ? , c.money = ? , c.remark = ? , c.item = ? , c.subItem = ? WHERE c.cashOutId = ?";
+		hql = "UPDATE CashOut c SET c.time = ? , c.site = ? , c.people = ? , c.money = ? , c.remark = ? , c.item = ? , c.subItem = ? , c.account = ? WHERE c.cashOutId = ?";
 		getSession().createQuery(hql).setParameter(0, cashOut.getTime()).setParameter(1, cashOut.getSite())
 				.setParameter(2, cashOut.getPeople()).setParameter(3, cashOut.getMoney())
 				.setParameter(4, cashOut.getRemark()).setParameter(5, cashOut.getItem())
-				.setParameter(6, cashOut.getSubItem()).setParameter(7, cashOut.getCashOutId()).executeUpdate();
+				.setParameter(6, cashOut.getSubItem()).setParameter(7, cashOut.getAccount())
+				.setParameter(8, cashOut.getCashOutId()).executeUpdate();
 	}
 
 	@Override

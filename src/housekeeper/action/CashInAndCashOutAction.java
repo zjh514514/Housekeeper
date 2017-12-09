@@ -42,6 +42,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	private Integer itemId;
 	private Integer subItemId;
 	private Integer id;
+	private Integer accountId;
 
 	public String getTime() {
 		return time;
@@ -115,6 +116,14 @@ public class CashInAndCashOutAction extends ActionSupport {
 		this.id = id;
 	}
 
+	public Integer getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+
 	/**
 	 * 增加一条收支记录
 	 * 
@@ -136,9 +145,10 @@ public class CashInAndCashOutAction extends ActionSupport {
 			memberId = jsonRequest.getInt("memberId");
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
+			accountId = jsonRequest.getInt("accountId");
 		}
 		String result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId,
-				subItemId);
+				subItemId, accountId);
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
@@ -167,9 +177,10 @@ public class CashInAndCashOutAction extends ActionSupport {
 			memberId = jsonRequest.getInt("memberId");
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
+			accountId = jsonRequest.getInt("accountId");
 		}
 		String result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId,
-				subItemId);
+				subItemId, accountId);
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
@@ -403,6 +414,72 @@ public class CashInAndCashOutAction extends ActionSupport {
 		List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutBySubItem(subItemId, memberId);
 
 		writer.writeObject(cashOuts);
+		writer.flush();
+		writer.close();
+	}
+
+	/**
+	 * 修改一条收入记录
+	 * 
+	 * @throws Exception
+	 */
+	public void inUpdate() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		JSONWriter writer = new JSONWriter(response.getWriter());
+
+		String json = getStrResponse.getStrResponse();
+		if (json != "") {
+			JSONObject jsonRequest = JSONObject.fromObject(json);
+			time = jsonRequest.getString("time");
+			site = jsonRequest.getString("site");
+			people = jsonRequest.getString("people");
+			money = jsonRequest.getDouble("money");
+			remark = jsonRequest.getString("remark");
+			memberId = jsonRequest.getInt("memberId");
+			itemId = jsonRequest.getInt("itemId");
+			subItemId = jsonRequest.getInt("subItemId");
+			accountId = jsonRequest.getInt("accountId");
+		}
+
+		String result = cashInAndCashOutService.updateCashIn(time, site, people, money, remark, itemId, subItemId, id,
+				accountId);
+		Map<String, String> results = new HashMap<>();
+		results.put("result", result);
+		writer.writeObject(results);
+		writer.flush();
+		writer.close();
+	}
+
+	/**
+	 * 修改一条支出记录
+	 * 
+	 * @throws Exception
+	 */
+	public void outUpdate() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		JSONWriter writer = new JSONWriter(response.getWriter());
+
+		String json = getStrResponse.getStrResponse();
+		if (json != "") {
+			JSONObject jsonRequest = JSONObject.fromObject(json);
+			time = jsonRequest.getString("time");
+			site = jsonRequest.getString("site");
+			people = jsonRequest.getString("people");
+			money = jsonRequest.getDouble("money");
+			remark = jsonRequest.getString("remark");
+			memberId = jsonRequest.getInt("memberId");
+			itemId = jsonRequest.getInt("itemId");
+			subItemId = jsonRequest.getInt("subItemId");
+			accountId = jsonRequest.getInt("accountId");
+		}
+
+		String result = cashInAndCashOutService.updateCashOut(time, site, people, money, remark, itemId, subItemId, id,
+				accountId);
+		Map<String, String> results = new HashMap<>();
+		results.put("result", result);
+		writer.writeObject(results);
 		writer.flush();
 		writer.close();
 	}

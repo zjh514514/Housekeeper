@@ -4,5 +4,4 @@
 <hibernate-reverse-engineering>
 	<table-filter match-catalog="GuanJiapo" match-name="CashInQuery" />
 	<table-filter match-catalog="GuanJiapo" match-name="CashOutQuery" />
-	<table-filter match-catalog="GuanJiapo" match-name="CardQuery" />
 </hibernate-reverse-engineering>

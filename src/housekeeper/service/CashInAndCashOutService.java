@@ -19,10 +19,11 @@ public interface CashInAndCashOutService {
 	 * @param memberId
 	 * @param itemId
 	 * @param subItemId
+	 * @param accountId
 	 * @return
 	 */
 	public String addCashIn(String time, String site, String people, Double money, String remark, Integer memberId,
-			Integer itemId, Integer subItemId);
+			Integer itemId, Integer subItemId, Integer accountId);
 
 	/**
 	 * 增加一条支出记录
@@ -35,10 +36,11 @@ public interface CashInAndCashOutService {
 	 * @param memberId
 	 * @param itemId
 	 * @param subItemId
+	 * @param accountId
 	 * @return
 	 */
 	public String addCashOut(String time, String site, String people, Double money, String remark, Integer memberId,
-			Integer itemId, Integer subItemId);
+			Integer itemId, Integer subItemId, Integer accountId);
 
 	/**
 	 * 删除某一收入记录
@@ -67,10 +69,11 @@ public interface CashInAndCashOutService {
 	 * @param itemId
 	 * @param subItemId
 	 * @param id
+	 * @param accountId
 	 * @return
 	 */
 	public String updateCashIn(String time, String site, String people, Double money, String remark, Integer itemId,
-			Integer subItemId, Integer id);
+			Integer subItemId, Integer id, Integer accountId);
 
 	/**
 	 * 修改某一支出记录信息
@@ -83,10 +86,11 @@ public interface CashInAndCashOutService {
 	 * @param itemId
 	 * @param subItemId
 	 * @param id
+	 * @param accountId
 	 * @return
 	 */
 	public String updateCashOut(String time, String site, String people, Double money, String remark, Integer itemId,
-			Integer subItemId, Integer id);
+			Integer subItemId, Integer id, Integer accountId);
 
 	/**
 	 * 查询某一成员下所有的收入信息

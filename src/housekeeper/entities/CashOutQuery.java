@@ -1,5 +1,5 @@
 package housekeeper.entities;
-// Generated 2017-12-9 17:20:53 by Hibernate Tools 5.2.5.Final
+// Generated 2017-12-9 21:16:03 by Hibernate Tools 5.2.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -16,8 +16,8 @@ import javax.persistence.Table;
 public class CashOutQuery implements java.io.Serializable {
 
 	/**
-	* 
-	*/
+	 * 
+	 */
 	private static final long serialVersionUID = -1298659829141462233L;
 	private CashOutQueryId id;
 
@@ -37,11 +37,13 @@ public class CashOutQuery implements java.io.Serializable {
 			@AttributeOverride(name = "people", column = @Column(name = "PEOPLE")),
 			@AttributeOverride(name = "money", column = @Column(name = "MONEY", precision = 22, scale = 0)),
 			@AttributeOverride(name = "remark", column = @Column(name = "REMARK")),
+			@AttributeOverride(name = "memberId", column = @Column(name = "MEMBER_ID")),
 			@AttributeOverride(name = "itemId", column = @Column(name = "ITEM_ID")),
 			@AttributeOverride(name = "subitemId", column = @Column(name = "SUBITEM_ID")),
+			@AttributeOverride(name = "accountId", column = @Column(name = "ACCOUNT_ID")),
 			@AttributeOverride(name = "itemName", column = @Column(name = "ITEM_NAME")),
 			@AttributeOverride(name = "subitemName", column = @Column(name = "SUBITEM_NAME")),
-			@AttributeOverride(name = "memberId", column = @Column(name = "MEMBER_ID")) })
+			@AttributeOverride(name = "accountName", column = @Column(name = "ACCOUNT_NAME")) })
 	public CashOutQueryId getId() {
 		return this.id;
 	}

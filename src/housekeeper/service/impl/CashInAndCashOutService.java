@@ -13,6 +13,7 @@ import housekeeper.dao.CashOutDao;
 import housekeeper.dao.ItemDao;
 import housekeeper.dao.MemberDao;
 import housekeeper.dao.SubItemDao;
+import housekeeper.entities.Account;
 import housekeeper.entities.CashIn;
 import housekeeper.entities.CashOut;
 import housekeeper.entities.Item;
@@ -36,6 +37,8 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 	private ItemDao itemDao;
 	@Resource
 	private SubItemDao subItemDao;
+	@Resource
+	private Account account;
 
 	@Resource(name = "member")
 	private Member member;
@@ -46,7 +49,7 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 
 	@Override
 	public String addCashIn(String time, String site, String people, Double money, String remark, Integer memberId,
-			Integer itemId, Integer subItemId) {
+			Integer itemId, Integer subItemId, Integer accountId) {
 		try {
 			Date date;
 			if (time == null || time == "") {
@@ -62,16 +65,19 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 				money = 0.0;
 			if (remark == null)
 				remark = "";
-			if (memberId != null && itemId != null && subItemId != null && memberDao.queryById(memberId).size() != 0
-					&& itemDao.queryById(itemId).size() != 0 && subItemDao.queryById(subItemId).size() != 0) {
+			if (memberId != null && itemId != null && subItemId != null && accountId != null
+					&& memberDao.queryById(memberId).size() != 0 && itemDao.queryById(itemId).size() != 0
+					&& subItemDao.queryById(subItemId).size() != 0) {
 				item.setItemId(itemId);
 				subItem.setSubItemId(subItemId);
 				member.setMemberId(memberId);
+				account.setAccountId(accountId);
 				cashIn.setMoney(money);
 				cashIn.setPeople(people);
 				cashIn.setRemark(remark);
 				cashIn.setSite(site);
 				cashIn.setTime(date);
+				cashIn.setAccount(account);
 				cashIn.setItem(item);
 				cashIn.setMember(member);
 				cashIn.setSubItem(subItem);
@@ -88,7 +94,7 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 
 	@Override
 	public String addCashOut(String time, String site, String people, Double money, String remark, Integer memberId,
-			Integer itemId, Integer subItemId) {
+			Integer itemId, Integer subItemId, Integer accountId) {
 		try {
 			Date date;
 			if (time == null) {
@@ -104,16 +110,19 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 				money = 0.0;
 			if (remark == null)
 				remark = "";
-			if (memberId != null && itemId != null && subItemId != null && memberDao.queryById(memberId).size() != 0
-					&& itemDao.queryById(itemId).size() != 0 && subItemDao.queryById(subItemId).size() != 0) {
+			if (memberId != null && itemId != null && subItemId != null && accountId != null
+					&& memberDao.queryById(memberId).size() != 0 && itemDao.queryById(itemId).size() != 0
+					&& subItemDao.queryById(subItemId).size() != 0) {
 				item.setItemId(itemId);
 				subItem.setSubItemId(subItemId);
 				member.setMemberId(memberId);
+				account.setAccountId(accountId);
 				cashOut.setMoney(money);
 				cashOut.setPeople(people);
 				cashOut.setRemark(remark);
 				cashOut.setSite(site);
 				cashOut.setTime(date);
+				cashOut.setAccount(account);
 				cashOut.setItem(item);
 				cashOut.setMember(member);
 				cashOut.setSubItem(subItem);
@@ -160,7 +169,7 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 
 	@Override
 	public String updateCashIn(String time, String site, String people, Double money, String remark, Integer itemId,
-			Integer subItemId, Integer id) {
+			Integer subItemId, Integer id, Integer accountId) {
 		try {
 			if (id != null) {
 				if (site == null)
@@ -177,16 +186,18 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 				} else {
 					date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time);
 				}
-				if (itemId != null && subItemId != null && cashInDao.queryById(id).size() != 0
+				if (itemId != null && subItemId != null && accountId != null && cashInDao.queryById(id).size() != 0
 						&& itemDao.queryById(itemId).size() != 0 && subItemDao.queryById(subItemId).size() != 0) {
 					item.setItemId(itemId);
 					subItem.setSubItemId(subItemId);
+					account.setAccountId(accountId);
 					cashIn.setCashInId(id);
 					cashIn.setMoney(money);
 					cashIn.setPeople(people);
 					cashIn.setRemark(remark);
 					cashIn.setSite(site);
 					cashIn.setTime(date);
+					cashIn.setAccount(account);
 					cashIn.setItem(item);
 					cashIn.setSubItem(subItem);
 					cashInDao.update(cashIn);
@@ -205,7 +216,7 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 
 	@Override
 	public String updateCashOut(String time, String site, String people, Double money, String remark, Integer itemId,
-			Integer subItemId, Integer id) {
+			Integer subItemId, Integer id, Integer accountId) {
 		try {
 			if (id != null) {
 				if (site == null)
@@ -222,16 +233,18 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 				} else {
 					date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time);
 				}
-				if (itemId != null && subItemId != null && cashOutDao.queryById(id).size() != 0
+				if (itemId != null && subItemId != null && accountId != null & cashOutDao.queryById(id).size() != 0
 						&& itemDao.queryById(itemId).size() != 0 && subItemDao.queryById(subItemId).size() != 0) {
 					item.setItemId(itemId);
 					subItem.setSubItemId(subItemId);
+					account.setAccountId(accountId);
 					cashOut.setCashOutId(id);
 					cashOut.setMoney(money);
 					cashOut.setPeople(people);
 					cashOut.setRemark(remark);
 					cashOut.setSite(site);
 					cashOut.setTime(date);
+					cashOut.setAccount(account);
 					cashOut.setItem(item);
 					cashOut.setSubItem(subItem);
 					cashOutDao.update(cashOut);

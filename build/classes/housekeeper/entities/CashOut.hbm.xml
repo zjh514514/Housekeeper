@@ -30,6 +30,11 @@
 			<column name="REMARK" />
 		</property>
 
+		<many-to-one name="account" class="housekeeper.entities.Account"
+			lazy="false">
+			<column name="ACCOUNT_ID" />
+		</many-to-one>
+
 		<many-to-one name="member" class="housekeeper.entities.Member"
 			lazy="false">
 			<column name="MEMBER_ID" />

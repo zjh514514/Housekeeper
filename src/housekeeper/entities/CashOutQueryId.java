@@ -1,5 +1,5 @@
 package housekeeper.entities;
-// Generated 2017-12-9 17:20:53 by Hibernate Tools 5.2.5.Final
+// Generated 2017-12-9 21:16:03 by Hibernate Tools 5.2.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,20 +12,22 @@ import javax.persistence.Embeddable;
 public class CashOutQueryId implements java.io.Serializable {
 
 	/**
-	* 
-	*/
-	private static final long serialVersionUID = -6528550147293143547L;
+	 * 
+	 */
+	private static final long serialVersionUID = 3627395744068522379L;
 	private int cashoutId;
 	private Date time;
 	private String site;
 	private String people;
 	private Double money;
 	private String remark;
+	private Integer memberId;
 	private Integer itemId;
 	private Integer subitemId;
+	private Integer accountId;
 	private String itemName;
 	private String subitemName;
-	private Integer memberId;
+	private String accountName;
 
 	public CashOutQueryId() {
 	}
@@ -35,18 +37,21 @@ public class CashOutQueryId implements java.io.Serializable {
 	}
 
 	public CashOutQueryId(int cashoutId, Date time, String site, String people, Double money, String remark,
-			Integer itemId, Integer subitemId, String itemName, String subitemName, Integer memberId) {
+			Integer memberId, Integer itemId, Integer subitemId, Integer accountId, String itemName, String subitemName,
+			String accountName) {
 		this.cashoutId = cashoutId;
 		this.time = time;
 		this.site = site;
 		this.people = people;
 		this.money = money;
 		this.remark = remark;
+		this.memberId = memberId;
 		this.itemId = itemId;
 		this.subitemId = subitemId;
+		this.accountId = accountId;
 		this.itemName = itemName;
 		this.subitemName = subitemName;
-		this.memberId = memberId;
+		this.accountName = accountName;
 	}
 
 	@Column(name = "CASHOUT_ID", nullable = false)
@@ -103,6 +108,15 @@ public class CashOutQueryId implements java.io.Serializable {
 		this.remark = remark;
 	}
 
+	@Column(name = "MEMBER_ID")
+	public Integer getMemberId() {
+		return this.memberId;
+	}
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
+
 	@Column(name = "ITEM_ID")
 	public Integer getItemId() {
 		return this.itemId;
@@ -119,6 +133,15 @@ public class CashOutQueryId implements java.io.Serializable {
 
 	public void setSubitemId(Integer subitemId) {
 		this.subitemId = subitemId;
+	}
+
+	@Column(name = "ACCOUNT_ID")
+	public Integer getAccountId() {
+		return this.accountId;
+	}
+
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
 	}
 
 	@Column(name = "ITEM_NAME")
@@ -139,13 +162,13 @@ public class CashOutQueryId implements java.io.Serializable {
 		this.subitemName = subitemName;
 	}
 
-	@Column(name = "MEMBER_ID")
-	public Integer getMemberId() {
-		return this.memberId;
+	@Column(name = "ACCOUNT_NAME")
+	public String getAccountName() {
+		return this.accountName;
 	}
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
 	public boolean equals(Object other) {
@@ -168,17 +191,22 @@ public class CashOutQueryId implements java.io.Serializable {
 						&& castOther.getMoney() != null && this.getMoney().equals(castOther.getMoney())))
 				&& ((this.getRemark() == castOther.getRemark()) || (this.getRemark() != null
 						&& castOther.getRemark() != null && this.getRemark().equals(castOther.getRemark())))
+				&& ((this.getMemberId() == castOther.getMemberId()) || (this.getMemberId() != null
+						&& castOther.getMemberId() != null && this.getMemberId().equals(castOther.getMemberId())))
 				&& ((this.getItemId() == castOther.getItemId()) || (this.getItemId() != null
 						&& castOther.getItemId() != null && this.getItemId().equals(castOther.getItemId())))
 				&& ((this.getSubitemId() == castOther.getSubitemId()) || (this.getSubitemId() != null
 						&& castOther.getSubitemId() != null && this.getSubitemId().equals(castOther.getSubitemId())))
+				&& ((this.getAccountId() == castOther.getAccountId()) || (this.getAccountId() != null
+						&& castOther.getAccountId() != null && this.getAccountId().equals(castOther.getAccountId())))
 				&& ((this.getItemName() == castOther.getItemName()) || (this.getItemName() != null
 						&& castOther.getItemName() != null && this.getItemName().equals(castOther.getItemName())))
 				&& ((this.getSubitemName() == castOther.getSubitemName())
 						|| (this.getSubitemName() != null && castOther.getSubitemName() != null
 								&& this.getSubitemName().equals(castOther.getSubitemName())))
-				&& ((this.getMemberId() == castOther.getMemberId()) || (this.getMemberId() != null
-						&& castOther.getMemberId() != null && this.getMemberId().equals(castOther.getMemberId())));
+				&& ((this.getAccountName() == castOther.getAccountName())
+						|| (this.getAccountName() != null && castOther.getAccountName() != null
+								&& this.getAccountName().equals(castOther.getAccountName())));
 	}
 
 	public int hashCode() {
@@ -190,11 +218,13 @@ public class CashOutQueryId implements java.io.Serializable {
 		result = 37 * result + (getPeople() == null ? 0 : this.getPeople().hashCode());
 		result = 37 * result + (getMoney() == null ? 0 : this.getMoney().hashCode());
 		result = 37 * result + (getRemark() == null ? 0 : this.getRemark().hashCode());
+		result = 37 * result + (getMemberId() == null ? 0 : this.getMemberId().hashCode());
 		result = 37 * result + (getItemId() == null ? 0 : this.getItemId().hashCode());
 		result = 37 * result + (getSubitemId() == null ? 0 : this.getSubitemId().hashCode());
+		result = 37 * result + (getAccountId() == null ? 0 : this.getAccountId().hashCode());
 		result = 37 * result + (getItemName() == null ? 0 : this.getItemName().hashCode());
 		result = 37 * result + (getSubitemName() == null ? 0 : this.getSubitemName().hashCode());
-		result = 37 * result + (getMemberId() == null ? 0 : this.getMemberId().hashCode());
+		result = 37 * result + (getAccountName() == null ? 0 : this.getAccountName().hashCode());
 		return result;
 	}
 

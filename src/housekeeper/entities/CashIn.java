@@ -14,6 +14,7 @@ public class CashIn {
 	private Double money;
 	private String remark;
 
+	private Account account;
 	private Member member;
 	private Item item;
 	private SubItem subItem;
@@ -90,10 +91,19 @@ public class CashIn {
 		this.subItem = subItem;
 	}
 
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	@Override
 	public String toString() {
 		return "CashIn [cashInId=" + cashInId + ", time=" + time + ", site=" + site + ", people=" + people + ", money="
-				+ money + ", remark=" + remark + ", member=" + member + ", item=" + item + ", subItem=" + subItem + "]";
+				+ money + ", remark=" + remark + ", account=" + account + ", member=" + member + ", item=" + item
+				+ ", subItem=" + subItem + "]";
 	}
 
 }

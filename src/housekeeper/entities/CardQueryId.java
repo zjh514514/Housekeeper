@@ -12,7 +12,11 @@ import javax.persistence.Embeddable;
 public class CardQueryId  implements java.io.Serializable {
 
 
-     private int cardId;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5753156688528326449L;
+	private int cardId;
      private String cardName;
      private String cardNumber;
      private Double money;

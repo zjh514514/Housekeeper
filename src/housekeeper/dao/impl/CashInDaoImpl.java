@@ -26,11 +26,12 @@ public class CashInDaoImpl extends HibernateTools implements CashInDao {
 
 	@Override
 	public void update(CashIn cashIn) {
-		hql = "UPDATE CashIn c SET c.time = ? , c.site = ? , c.people = ? , c.money = ? , c.remark = ? , c.item = ? , c.subItem = ? WHERE c.cashInId = ?";
+		hql = "UPDATE CashIn c SET c.time = ? , c.site = ? , c.people = ? , c.money = ? , c.remark = ? , c.item = ? , c.subItem = ? , c.account = ? WHERE c.cashInId = ?";
 		getSession().createQuery(hql).setParameter(0, cashIn.getTime()).setParameter(1, cashIn.getSite())
 				.setParameter(2, cashIn.getPeople()).setParameter(3, cashIn.getMoney())
 				.setParameter(4, cashIn.getRemark()).setParameter(5, cashIn.getItem())
-				.setParameter(6, cashIn.getSubItem()).setParameter(7, cashIn.getCashInId()).executeUpdate();
+				.setParameter(6, cashIn.getSubItem()).setParameter(7, cashIn.getAccount())
+				.setParameter(8, cashIn.getCashInId()).executeUpdate();
 	}
 
 	@Override

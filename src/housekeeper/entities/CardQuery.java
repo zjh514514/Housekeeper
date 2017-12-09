@@ -19,7 +19,11 @@ import javax.persistence.Table;
 public class CardQuery  implements java.io.Serializable {
 
 
-     private CardQueryId id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2573619991671317203L;
+	private CardQueryId id;
 
     public CardQuery() {
     }

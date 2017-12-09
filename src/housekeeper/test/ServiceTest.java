@@ -177,7 +177,7 @@ public class ServiceTest {
 	 */
 	@Test
 	public void testAddCashIn() {
-		System.out.println(cashInAndCashOutServoice.addCashIn("", "", "", 846.05, "", 6, 1, 13));
+		System.out.println(cashInAndCashOutServoice.addCashIn("", "", "", 846.05, "", 6, 1, 13, 1));
 	}
 
 	@Test
@@ -187,7 +187,7 @@ public class ServiceTest {
 
 	@Test
 	public void testUpdateCashIn() {
-		System.out.println(cashInAndCashOutServoice.updateCashIn(null, "ee", "ee", 987.05, "ee", null, 1, 8));
+		System.out.println(cashInAndCashOutServoice.updateCashIn(null, "ee", "ee", 987.05, "ee", null, 1, 8, 8));
 	}
 
 	@Test
