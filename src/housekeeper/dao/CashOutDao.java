@@ -3,9 +3,6 @@ package housekeeper.dao;
 import java.util.List;
 
 import housekeeper.entities.CashOut;
-import housekeeper.entities.Item;
-import housekeeper.entities.Member;
-import housekeeper.entities.SubItem;
 
 public interface CashOutDao {
 
@@ -36,7 +33,7 @@ public interface CashOutDao {
 	 * @param member
 	 * @return
 	 */
-	public List<CashOut> queryByMember(Member member);
+	public List<CashOut> queryByMember(Integer memberId);
 
 	/**
 	 * 查询某一成员某一父类支出记录
@@ -45,7 +42,7 @@ public interface CashOutDao {
 	 * @param Member
 	 * @return
 	 */
-	public List<CashOut> queryByItem(Item Item, Member member);
+	public List<CashOut> queryByItem(Integer ItemId, Integer memberId);
 
 	/**
 	 * 查询某一成员某一子类支出记录
@@ -54,7 +51,7 @@ public interface CashOutDao {
 	 * @param Member
 	 * @return
 	 */
-	public List<CashOut> queryBySubItem(SubItem subItem, Member member);
+	public List<CashOut> queryBySubItem(Integer subItemId, Integer memberId);
 
 	/**
 	 * 查询一条支出记录

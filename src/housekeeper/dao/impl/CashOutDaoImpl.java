@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.CashOutDao;
 import housekeeper.entities.CashOut;
-import housekeeper.entities.Item;
-import housekeeper.entities.Member;
-import housekeeper.entities.SubItem;
 import housekeeper.tools.HibernateTools;
 
 @Repository
@@ -37,26 +34,26 @@ public class CashOutDaoImpl extends HibernateTools implements CashOutDao {
 	}
 
 	@Override
-	public List<CashOut> queryByMember(Member member) {
-		hql = "FROM CashOut c WHERE c.member = ?";
-		return getSession().createQuery(hql).setParameter(0, member).list();
+	public List<CashOut> queryByMember(Integer memberId) {
+		hql = "FROM CashOutQuery c WHERE c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, memberId).list();
 	}
 
 	@Override
-	public List<CashOut> queryByItem(Item item, Member member) {
-		hql = "FROM CashOut c WHERE c.item = ? AND c.member= ? ";
-		return getSession().createQuery(hql).setParameter(0, item).setParameter(1, member).list();
+	public List<CashOut> queryByItem(Integer itemId, Integer memberId) {
+		hql = "FROM CashOutQuery c WHERE c.id.itemId = ? AND c.id.memberId = ? ";
+		return getSession().createQuery(hql).setParameter(0, itemId).setParameter(1, memberId).list();
 	}
 
 	@Override
-	public List<CashOut> queryBySubItem(SubItem subItem, Member member) {
-		hql = "FROM CashOut c WHERE c.subItem= ? AND c.member= ? ";
-		return getSession().createQuery(hql).setParameter(0, subItem).setParameter(1, member).list();
+	public List<CashOut> queryBySubItem(Integer subItemId, Integer memberId) {
+		hql = "FROM CashOutQuery c WHERE c.id.subitemId = ? AND c.id.memberId = ? ";
+		return getSession().createQuery(hql).setParameter(0, subItemId).setParameter(1, memberId).list();
 	}
 
 	@Override
 	public List<CashOut> queryById(Integer id) {
-		hql = "FROM CashOut c WHERE c.cashOutId = ?";
+		hql = "FROM CashOutQuery c WHERE c.id.cashoutId = ?";
 		return getSession().createQuery(hql).setParameter(0, id).list();
 	}
 

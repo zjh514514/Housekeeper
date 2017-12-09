@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2017-12-9 17:20:54 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class catalog="GuanJiapo" dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="housekeeper.entities.CardQuery" optimistic-lock="version"
+		polymorphism="implicit" select-before-update="false" table="CardQuery">
+		<composite-id class="housekeeper.entities.CardQueryId"
+			mapped="false" name="id" unsaved-value="undefined">
+			<key-property name="cardId" type="int">
+				<column name="CARD_ID" />
+			</key-property>
+			<key-property name="cardName" type="string">
+				<column name="CARD_NAME" />
+			</key-property>
+			<key-property name="cardNumber" type="string">
+				<column name="CARD_NUMBER" />
+			</key-property>
+			<key-property name="money" type="java.lang.Double">
+				<column name="MONEY" precision="22" scale="0" />
+			</key-property>
+			<key-property name="remark" type="string">
+				<column name="REMARK" />
+			</key-property>
+			<key-property name="memberId" type="int">
+				<column name="MEMBER_ID" />
+			</key-property>
+		</composite-id>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2017-12-9 16:05:59 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+
+	<class catalog="GuanJiapo" dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="housekeeper.entities.SubItemQuery"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="SubItemQuery">
+
+		<composite-id class="housekeeper.entities.SubItemQueryId"
+			mapped="false" name="id" unsaved-value="undefined">
+
+			<key-property name="itemId" type="int">
+				<column name="ITEM_ID" />
+			</key-property>
+
+			<key-property name="subitemId" type="int">
+				<column name="SUBITEM_ID" />
+			</key-property>
+
+			<key-property name="subitemName" type="string">
+				<column name="SUBITEM_NAME" />
+			</key-property>
+
+		</composite-id>
+
+	</class>
+
+</hibernate-mapping>

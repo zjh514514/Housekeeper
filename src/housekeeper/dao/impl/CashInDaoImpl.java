@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.CashInDao;
 import housekeeper.entities.CashIn;
-import housekeeper.entities.Item;
-import housekeeper.entities.Member;
-import housekeeper.entities.SubItem;
 import housekeeper.tools.HibernateTools;
 
 @Repository
@@ -37,26 +34,26 @@ public class CashInDaoImpl extends HibernateTools implements CashInDao {
 	}
 
 	@Override
-	public List<CashIn> queryByMember(Member member) {
-		hql = "FROM CashIn c WHERE c.member = ?";
-		return getSession().createQuery(hql).setParameter(0, member).list();
+	public List<CashIn> queryByMember(Integer memberId) {
+		hql = "FROM CashInQuery c WHERE c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, memberId).list();
 	}
 
 	@Override
-	public List<CashIn> queryByItem(Item item, Member member) {
-		hql = "FROM CashIn c WHERE c.item = ? AND c.member = ?";
-		return getSession().createQuery(hql).setParameter(0, item).setParameter(1, member).list();
+	public List<CashIn> queryByItem(Integer itemId, Integer memberId) {
+		hql = "FROM CashInQuery c WHERE c.id.itemId = ? AND c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, itemId).setParameter(1, memberId).list();
 	}
 
 	@Override
-	public List<CashIn> queryBySubItem(SubItem subItem, Member member) {
-		hql = "FROM CashIn c WHERE c.subItem=? AND c.member = ?";
-		return getSession().createQuery(hql).setParameter(0, subItem).setParameter(1, member).list();
+	public List<CashIn> queryBySubItem(Integer subItemId, Integer memberId) {
+		hql = "FROM CashInQuery c WHERE c.id.subitemId = ? AND c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, subItemId).setParameter(1, memberId).list();
 	}
 
 	@Override
 	public List<CashIn> queryById(Integer id) {
-		hql = "FROM CashIn c WHERE c.cashInId = ?";
+		hql = "FROM CashInQuery c WHERE c.id.cashinId = ?";
 		return getSession().createQuery(hql).setParameter(0, id).list();
 	}
 

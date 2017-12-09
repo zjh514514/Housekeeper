@@ -3,7 +3,6 @@ package housekeeper.dao;
 import java.util.List;
 
 import housekeeper.entities.Card;
-import housekeeper.entities.Member;
 
 public interface CardDao {
 
@@ -34,7 +33,7 @@ public interface CardDao {
 	 * @param member
 	 * @return
 	 */
-	public List<Card> queryByMember(Member member);
+	public List<Card> queryByMember(Integer memberId);
 
 	/**
 	 * 查询某一张银行卡

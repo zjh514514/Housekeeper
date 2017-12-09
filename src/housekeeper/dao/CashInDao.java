@@ -3,9 +3,6 @@ package housekeeper.dao;
 import java.util.List;
 
 import housekeeper.entities.CashIn;
-import housekeeper.entities.Item;
-import housekeeper.entities.Member;
-import housekeeper.entities.SubItem;
 
 public interface CashInDao {
 
@@ -36,7 +33,7 @@ public interface CashInDao {
 	 * @param menber
 	 * @return
 	 */
-	public List<CashIn> queryByMember(Member member);
+	public List<CashIn> queryByMember(Integer memberId);
 
 	/**
 	 * 查询某一成员某一父类收入记录
@@ -45,7 +42,7 @@ public interface CashInDao {
 	 * @param Member
 	 * @return
 	 */
-	public List<CashIn> queryByItem(Item Item, Member member);
+	public List<CashIn> queryByItem(Integer ItemId, Integer memberId);
 
 	/**
 	 * 查询某一成员某一子类收入记录
@@ -54,7 +51,7 @@ public interface CashInDao {
 	 * @param Member
 	 * @return
 	 */
-	public List<CashIn> queryBySubItem(SubItem subItem, Member member);
+	public List<CashIn> queryBySubItem(Integer subItemId, Integer memberId);
 
 	/**
 	 * 查询某一条收入记录

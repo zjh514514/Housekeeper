@@ -51,7 +51,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	private CashOutDao cashOutDao;
 
 	/**
-	 * ²âÊÔItemDao
+	 * ï¿½ï¿½ï¿½ï¿½ItemDao
 	 */
 	@Test
 	public void testItemGetAll() {
@@ -65,7 +65,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testItemSave() {
 		Item item = new Item();
-		item.setItemName("ÐÝÏÐ");
+		item.setItemName("ï¿½ï¿½ï¿½ï¿½");
 		itemDao.save(item);
 	}
 
@@ -76,7 +76,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testItemUpdate() {
-		itemDao.update(3, "ÐÝÏÐ");
+		itemDao.update(3, "ï¿½ï¿½ï¿½ï¿½");
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔSubItemDao
+	 * ï¿½ï¿½ï¿½ï¿½SubItemDao
 	 */
 	@Test
 	public void testSubItemGetAll() {
@@ -108,7 +108,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 		Item item = new Item();
 		item.setItemId(1);
 		subItem.setItem(item);
-		subItem.setSubItemName("ÖÐ·¹");
+		subItem.setSubItemName("ï¿½Ð·ï¿½");
 		subItemDao.save(subItem);
 	}
 
@@ -119,14 +119,14 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testSubItemUpdate() {
-		subItemDao.update(2, "Íí·¹");
+		subItemDao.update(2, "ï¿½ï¿½");
 	}
 
 	@Test
 	public void testSubItemQueryByItem() {
-		Item item = new Item();
-		item.setItemId(1);
-		System.out.println(subItemDao.queryByItem(item));
+		// Item item = new Item();
+		// item.setItemId(1);
+		System.out.println(subItemDao.queryByItem(1));
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔFamilyDao
+	 * ï¿½ï¿½ï¿½ï¿½FamilyDao
 	 */
 	@Test
 	public void testFamilySave() {
@@ -182,7 +182,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔMemberDao
+	 * ï¿½ï¿½ï¿½ï¿½MemberDao
 	 */
 	@Test
 	public void testMemberSave() {
@@ -243,7 +243,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔCardDao
+	 * ï¿½ï¿½ï¿½ï¿½CardDao
 	 */
 	@Test
 	public void testCardSave() {
@@ -279,7 +279,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	public void testCardQueryByMember() {
 		Member member = new Member();
 		member.setMemberId(1);
-		System.out.println(cardDao.queryByMember(member));
+		System.out.println(cardDao.queryByMember(3));
 	}
 
 	@Test
@@ -288,7 +288,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔCashInDao
+	 * ï¿½ï¿½ï¿½ï¿½CashInDao
 	 * 
 	 * @throws ParseException
 	 */
@@ -344,31 +344,31 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testCashInQueryByMember() {
-		Member member = new Member();
-		member.setMemberId(1);
-		System.out.println(cashInDao.queryByMember(member));
+		// Member member = new Member();
+		// member.setMemberId(1);
+		System.out.println(cashInDao.queryByMember(3));
 	}
 
 	@Test
 	public void testCashInQueryByItem() {
-		Item item = new Item();
-		item.setItemId(1);
+		// Item item = new Item();
+		// item.setItemId(1);
+		//
+		// Member member = new Member();
+		// member.setMemberId(6);
 
-		Member member = new Member();
-		member.setMemberId(6);
-
-		System.out.println(cashInDao.queryByItem(item, member));
+		System.out.println(cashInDao.queryByItem(5, 3));
 	}
 
 	@Test
 	public void testCashInQueryBySubItem() {
-		SubItem subItem = new SubItem();
-		subItem.setSubItemId(1);
+		// SubItem subItem = new SubItem();
+		// subItem.setSubItemId(1);
+		//
+		// Member member = new Member();
+		// member.setMemberId(6);
 
-		Member member = new Member();
-		member.setMemberId(6);
-
-		System.out.println(cashInDao.queryBySubItem(subItem, member));
+		System.out.println(cashInDao.queryBySubItem(15, 3));
 	}
 
 	@Test
@@ -377,7 +377,7 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	/**
-	 * ²âÊÔCashOutDao
+	 * ï¿½ï¿½ï¿½ï¿½CashOutDao
 	 * 
 	 * @throws ParseException
 	 */
@@ -437,26 +437,26 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testCashOutQueryByMember() {
-		Member member = new Member();
-		member.setMemberId(1);
-		System.out.println(cashOutDao.queryByMember(member));
+		// Member member = new Member();
+		// member.setMemberId(1);
+		System.out.println(cashOutDao.queryByMember(1));
 	}
 
 	@Test
 	public void testCashOutQueryByItem() {
-		Item item = new Item();
-		item.setItemId(2);
-		Member member = new Member();
-		member.setMemberId(6);
-		System.out.println(cashOutDao.queryByItem(item, member));
+		// Item item = new Item();
+		// item.setItemId(2);
+		// Member member = new Member();
+		// member.setMemberId(6);
+		System.out.println(cashOutDao.queryByItem(1, 1));
 	}
 
 	@Test
 	public void testCashOutQueryBySubItem() {
-		SubItem subItem = new SubItem();
-		subItem.setSubItemId(2);
-		Member member = new Member();
-		member.setMemberId(6);
-		System.out.println(cashOutDao.queryBySubItem(subItem, member));
+		// SubItem subItem = new SubItem();
+		// subItem.setSubItemId(2);
+		// Member member = new Member();
+		// member.setMemberId(6);
+		System.out.println(cashOutDao.queryBySubItem(1, 1));
 	}
 }

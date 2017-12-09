@@ -1,5 +1,5 @@
 package housekeeper.entities;
-// Generated 2017-12-7 10:36:33 by Hibernate Tools 5.2.5.Final
+// Generated 2017-12-9 17:20:53 by Hibernate Tools 5.2.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -16,10 +16,9 @@ import javax.persistence.Table;
 public class CashInQuery implements java.io.Serializable {
 
 	/**
-	 * 
-	 */
+	* 
+	*/
 	private static final long serialVersionUID = -5485174810272309945L;
-
 	private CashInQueryId id;
 
 	public CashInQuery() {
@@ -40,7 +39,8 @@ public class CashInQuery implements java.io.Serializable {
 			@AttributeOverride(name = "remark", column = @Column(name = "REMARK")),
 			@AttributeOverride(name = "itemId", column = @Column(name = "ITEM_ID")),
 			@AttributeOverride(name = "subitemId", column = @Column(name = "SUBITEM_ID")),
-			@AttributeOverride(name = "subitemName", column = @Column(name = "SUBITEM_NAME")) })
+			@AttributeOverride(name = "subitemName", column = @Column(name = "SUBITEM_NAME")),
+			@AttributeOverride(name = "memberId", column = @Column(name = "MEMBER_ID")) })
 	public CashInQueryId getId() {
 		return this.id;
 	}

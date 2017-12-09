@@ -1,5 +1,5 @@
 package housekeeper.entities;
-// Generated 2017-12-7 10:36:33 by Hibernate Tools 5.2.5.Final
+// Generated 2017-12-9 17:20:53 by Hibernate Tools 5.2.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,10 +12,9 @@ import javax.persistence.Embeddable;
 public class CashOutQueryId implements java.io.Serializable {
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6257530852181152022L;
-
+	* 
+	*/
+	private static final long serialVersionUID = -6528550147293143547L;
 	private int cashoutId;
 	private Date time;
 	private String site;
@@ -26,6 +25,7 @@ public class CashOutQueryId implements java.io.Serializable {
 	private Integer subitemId;
 	private String itemName;
 	private String subitemName;
+	private Integer memberId;
 
 	public CashOutQueryId() {
 	}
@@ -35,7 +35,7 @@ public class CashOutQueryId implements java.io.Serializable {
 	}
 
 	public CashOutQueryId(int cashoutId, Date time, String site, String people, Double money, String remark,
-			Integer itemId, Integer subitemId, String itemName, String subitemName) {
+			Integer itemId, Integer subitemId, String itemName, String subitemName, Integer memberId) {
 		this.cashoutId = cashoutId;
 		this.time = time;
 		this.site = site;
@@ -46,6 +46,7 @@ public class CashOutQueryId implements java.io.Serializable {
 		this.subitemId = subitemId;
 		this.itemName = itemName;
 		this.subitemName = subitemName;
+		this.memberId = memberId;
 	}
 
 	@Column(name = "CASHOUT_ID", nullable = false)
@@ -138,6 +139,15 @@ public class CashOutQueryId implements java.io.Serializable {
 		this.subitemName = subitemName;
 	}
 
+	@Column(name = "MEMBER_ID")
+	public Integer getMemberId() {
+		return this.memberId;
+	}
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -166,7 +176,9 @@ public class CashOutQueryId implements java.io.Serializable {
 						&& castOther.getItemName() != null && this.getItemName().equals(castOther.getItemName())))
 				&& ((this.getSubitemName() == castOther.getSubitemName())
 						|| (this.getSubitemName() != null && castOther.getSubitemName() != null
-								&& this.getSubitemName().equals(castOther.getSubitemName())));
+								&& this.getSubitemName().equals(castOther.getSubitemName())))
+				&& ((this.getMemberId() == castOther.getMemberId()) || (this.getMemberId() != null
+						&& castOther.getMemberId() != null && this.getMemberId().equals(castOther.getMemberId())));
 	}
 
 	public int hashCode() {
@@ -182,6 +194,7 @@ public class CashOutQueryId implements java.io.Serializable {
 		result = 37 * result + (getSubitemId() == null ? 0 : this.getSubitemId().hashCode());
 		result = 37 * result + (getItemName() == null ? 0 : this.getItemName().hashCode());
 		result = 37 * result + (getSubitemName() == null ? 0 : this.getSubitemName().hashCode());
+		result = 37 * result + (getMemberId() == null ? 0 : this.getMemberId().hashCode());
 		return result;
 	}
 

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.SubItemDao;
-import housekeeper.entities.Item;
 import housekeeper.entities.SubItem;
 import housekeeper.tools.HibernateTools;
 
@@ -38,9 +37,9 @@ public class SubItemDaoImpl extends HibernateTools implements SubItemDao {
 	}
 
 	@Override
-	public List<SubItem> queryByItem(Item item) {
-		hql = "FROM SubItem s WHERE s.item = ?";
-		return getSession().createQuery(hql).setParameter(0, item).list();
+	public List<SubItem> queryByItem(Integer itemId) {
+		hql = "FROM SubItemQuery s WHERE s.id.itemId = ?";
+		return getSession().createQuery(hql).setParameter(0, itemId).list();
 	}
 
 	@Override

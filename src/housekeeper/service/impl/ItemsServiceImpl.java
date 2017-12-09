@@ -164,8 +164,8 @@ public class ItemsServiceImpl implements ItemsService {
 	@Override
 	public List<SubItem> querySubItem(Integer itemId) {
 		if (itemId != null) {
-			item.setItemId(itemId);
-			List<SubItem> subItems = subItemDao.queryByItem(item);
+//			item.setItemId(itemId);
+			List<SubItem> subItems = subItemDao.queryByItem(itemId);
 			if (subItems.size() != 0) {
 				return subItems;
 			} else {

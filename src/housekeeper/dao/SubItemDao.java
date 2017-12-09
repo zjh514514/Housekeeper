@@ -2,7 +2,6 @@ package housekeeper.dao;
 
 import java.util.List;
 
-import housekeeper.entities.Item;
 import housekeeper.entities.SubItem;
 
 public interface SubItemDao {
@@ -42,7 +41,7 @@ public interface SubItemDao {
 	 * @param item
 	 * @return
 	 */
-	public List<SubItem> queryByItem(Item item);
+	public List<SubItem> queryByItem(Integer itemId);
 
 	/**
 	 * 通过子类名查询子类

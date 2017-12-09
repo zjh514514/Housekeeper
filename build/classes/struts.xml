@@ -26,7 +26,7 @@
 			method="{1}">
 		</action>
 
-		<action name="card-*" class="houkeeper.action.CardAction"
+		<action name="card-*" class="housekeeper.action.CardAction"
 			method="{1}"></action>
 
 	</package>

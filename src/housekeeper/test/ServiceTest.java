@@ -101,7 +101,7 @@ public class ServiceTest {
 	}
 
 	/*
-	 * ����ItemsService
+	 * 测试ItemsService
 	 */
 	@Test
 	public void testItemsAddItems() {

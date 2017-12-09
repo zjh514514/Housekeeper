@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.CardDao;
 import housekeeper.entities.Card;
-import housekeeper.entities.Member;
 import housekeeper.tools.HibernateTools;
 
 @Repository
@@ -34,9 +33,9 @@ public class CardDaoImpl extends HibernateTools implements CardDao {
 	}
 
 	@Override
-	public List<Card> queryByMember(Member member) {
-		hql = "FROM Card c WHERE c.member = ?";
-		return getSession().createQuery(hql).setParameter(0, member).list();
+	public List<Card> queryByMember(Integer memberId) {
+		hql = "FROM CardQuery c WHERE c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, memberId).list();
 	}
 
 	@Override

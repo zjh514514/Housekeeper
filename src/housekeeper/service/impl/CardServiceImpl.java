@@ -105,8 +105,8 @@ public class CardServiceImpl implements CardService {
 	public List<Card> queryByMember(Integer memberId) {
 		if (memberId != null) {
 			if (memberId > 0 && memberDao.queryById(memberId).size() != 0) {
-				member.setMemberId(memberId);
-				List<Card> cards = cardDao.queryByMember(member);
+				// member.setMemberId(memberId);
+				List<Card> cards = cardDao.queryByMember(memberId);
 				if (cards.size() != 0) {
 					return cards;
 				} else {
