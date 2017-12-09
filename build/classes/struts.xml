@@ -29,6 +29,9 @@
 		<action name="card-*" class="housekeeper.action.CardAction"
 			method="{1}"></action>
 
+		<action name="account-*" class="housekeeper.action.AccountAction"
+			method="{1}"></action>
+
 	</package>
 
 </struts>

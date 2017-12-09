@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import housekeeper.dao.AccountDao;
 import housekeeper.entities.Account;
 import housekeeper.service.AccountService;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
 	@Resource
