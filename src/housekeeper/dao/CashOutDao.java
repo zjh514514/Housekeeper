@@ -2,7 +2,6 @@ package housekeeper.dao;
 
 import java.util.List;
 
-import housekeeper.entities.CashIn;
 import housekeeper.entities.CashOut;
 
 public interface CashOutDao {

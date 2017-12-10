@@ -38,11 +38,10 @@ public class LoginAction extends ActionSupport {
 	private String password;
 	private String name;
 	private String role;
-	private Integer familyId;
 	private String familyName;
-	private Integer memberId;
 	private Double balance;
 	private String which;
+	private Integer id;
 
 	public String getUsername() {
 		return username;
@@ -76,28 +75,12 @@ public class LoginAction extends ActionSupport {
 		this.role = role;
 	}
 
-	public Integer getFamilyId() {
-		return familyId;
-	}
-
-	public void setFamilyId(Integer familyId) {
-		this.familyId = familyId;
-	}
-
 	public String getFamilyName() {
 		return familyName;
 	}
 
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
-	}
-
-	public Integer getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
 	}
 
 	public Double getBalance() {
@@ -116,6 +99,14 @@ public class LoginAction extends ActionSupport {
 		this.which = which;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	/**
 	 * 登陆
 	 * 
@@ -123,6 +114,7 @@ public class LoginAction extends ActionSupport {
 	 */
 	public void login() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -147,25 +139,43 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/**
-	 * 成员添加
+	 * 添加
 	 * 
 	 * @throws Exception
 	 */
-	public void memberSign() throws Exception {
+	public void sign() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
+		JSONObject jsonRequest;
 		String json = getStrResponse.getStrResponse();
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			username = jsonRequest.getString("username");
-			password = jsonRequest.getString("password");
-			name = jsonRequest.getString("name");
-			role = jsonRequest.getString("role");
-			familyId = jsonRequest.getInt("familyId");
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			if (which.equals("m")) {
+				username = jsonRequest.getString("username");
+				password = jsonRequest.getString("password");
+				name = jsonRequest.getString("name");
+				role = jsonRequest.getString("role");
+				id = jsonRequest.getInt("id");
+				result = familyAndMemberService.memberSign(username, password, name, role, id);
+			} else {
+				username = jsonRequest.getString("username");
+				password = jsonRequest.getString("password");
+				familyName = jsonRequest.getString("familyName");
+				result = familyAndMemberService.familySign(username, password, familyName);
+			}
+		} else {
+			if (which.equals("m")) {
+				result = familyAndMemberService.memberSign(username, password, name, role, id);
+			} else {
+				result = familyAndMemberService.familySign(username, password, familyName);
+			}
 		}
-		String result = familyAndMemberService.memberSign(username, password, name, role, familyId);
+
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
@@ -174,23 +184,28 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/**
-	 * 家庭注册
+	 * 删除
 	 * 
 	 * @throws Exception
 	 */
-	public void familySign() throws Exception {
+	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
 		String json = getStrResponse.getStrResponse();
 		if (json != "") {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
-			username = jsonRequest.getString("username");
-			password = jsonRequest.getString("password");
-			familyName = jsonRequest.getString("familyName");
+			which = jsonRequest.getString("which");
+			id = jsonRequest.getInt("id");
 		}
-		String result = familyAndMemberService.familySign(username, password, familyName);
+		if (which.equals("m")) {
+			result = familyAndMemberService.memberDelete(id);
+		} else {
+			result = familyAndMemberService.familyDelete(id);
+		}
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
@@ -199,21 +214,42 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/**
-	 * 家庭删除
+	 * 修改信息
 	 * 
 	 * @throws Exception
 	 */
-	public void familyDelete() throws Exception {
+	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			familyId = jsonRequest.getInt("familyId");
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			if (which.equals("m")) {
+				password = jsonRequest.getString("password");
+				role = jsonRequest.getString("role");
+				balance = jsonRequest.getDouble("balance");
+				id = jsonRequest.getInt("id");
+				name = jsonRequest.getString("name");
+				result = familyAndMemberService.memberUpdate(password, role, balance, id, name);
+			} else {
+				password = jsonRequest.getString("password");
+				familyName = jsonRequest.getString("familyName");
+				id = jsonRequest.getInt("id");
+				result = familyAndMemberService.familyUpdate(password, familyName, id);
+			}
+		} else {
+			if (which.equals("m")) {
+				result = familyAndMemberService.memberUpdate(password, role, balance, id, name);
+			} else {
+				result = familyAndMemberService.familyUpdate(password, familyName, id);
+			}
 		}
-		String result = familyAndMemberService.familyDelete(familyId);
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
@@ -222,99 +258,33 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/**
-	 * 成员删除
+	 * 获取成员或家庭信息
 	 * 
 	 * @throws Exception
 	 */
-	public void memberDelete() throws Exception {
+	public void idGet() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
 		String json = getStrResponse.getStrResponse();
 		if (json != "") {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
-			memberId = jsonRequest.getInt("memberId");
+			which = jsonRequest.getString("which");
+			id = jsonRequest.getInt("id");
 		}
-		String result = familyAndMemberService.memberDelete(memberId);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 修改家庭信息
-	 * 
-	 * @throws Exception
-	 */
-	public void familyUpdate() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			password = jsonRequest.getString("password");
-			familyName = jsonRequest.getString("familyName");
-			familyId = jsonRequest.getInt("familyId");
+		if (which.equals("m")) {
+			List<Member> members = familyAndMemberService.memberGet(id);
+			writer.writeObject(members);
+			writer.flush();
+			writer.close();
+		} else {
+			List<Family> families = familyAndMemberService.familyGet(id);
+			writer.writeObject(families);
+			writer.flush();
+			writer.close();
 		}
-		String result = familyAndMemberService.familyUpdate(password, familyName, familyId);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 成员信息修改
-	 * 
-	 * @throws Exception
-	 */
-	public void memberUpdate() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			password = jsonRequest.getString("password");
-			role = jsonRequest.getString("role");
-			balance = jsonRequest.getDouble("balance");
-			memberId = jsonRequest.getInt("memberId");
-			name = jsonRequest.getString("name");
-		}
-		String result = familyAndMemberService.memberUpdate(password, role, balance, memberId, name);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 获取某一家庭信息
-	 * 
-	 * @throws Exception
-	 */
-	public void familyIdGet() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			familyId = jsonRequest.getInt("familyId");
-		}
-		List<Family> families = familyAndMemberService.familyGet(familyId);
-		writer.writeObject(families);
-		writer.flush();
-		writer.close();
 	}
 
 	/**
@@ -322,40 +292,21 @@ public class LoginAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void memberFamilyGet() throws Exception {
+	public void familyGet() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
 		String json = getStrResponse.getStrResponse();
 		if (json != "") {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
-			familyId = jsonRequest.getInt("familyId");
+			id = jsonRequest.getInt("id");
 		}
-		List<Member> members = familyAndMemberService.memberFamilyGet(familyId);
+		List<Member> members = familyAndMemberService.memberFamilyGet(id);
 		writer.writeObject(members);
 		writer.flush();
 		writer.close();
 	}
 
-	/**
-	 * 获取某一成员信息
-	 * 
-	 * @throws Exception
-	 */
-	public void memberIdGet() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			memberId = jsonRequest.getInt("memberId");
-		}
-		List<Member> members = familyAndMemberService.memberGet(memberId);
-		writer.writeObject(members);
-		writer.flush();
-		writer.close();
-	}
 }
