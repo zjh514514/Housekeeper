@@ -153,15 +153,16 @@ public class ItemAction extends ActionSupport {
 				id = jsonRequest.getInt("id");
 				result = itemsService.updateSubItem(subItemName, id);
 			}
-			results.put("results", result);
+			results.put("result", result);
 			writer.writeObject(results);
 			writer.flush();
 			writer.close();
 		} else {
-			writer.writeObject(null);
-			writer.flush();
-			writer.close();
+			results.put("result", "ERROR");
 		}
+		writer.writeObject(results);
+		writer.flush();
+		writer.close();
 	}
 
 	/**
@@ -193,10 +194,11 @@ public class ItemAction extends ActionSupport {
 			writer.flush();
 			writer.close();
 		} else {
-			writer.writeObject(null);
-			writer.flush();
-			writer.close();
+			results.put("result", "ERROR");
 		}
+		writer.writeObject(results);
+		writer.flush();
+		writer.close();
 	}
 
 	/**
@@ -227,14 +229,12 @@ public class ItemAction extends ActionSupport {
 				result = itemsService.addSubItems(subItemName, itemId);
 			}
 			results.put("result", result);
-			writer.writeObject(results);
-			writer.flush();
-			writer.close();
 		} else {
-			writer.writeObject(null);
-			writer.flush();
-			writer.close();
+			results.put("result", "ERROR");
 		}
+		writer.writeObject(results);
+		writer.flush();
+		writer.close();
 	}
 
 }
