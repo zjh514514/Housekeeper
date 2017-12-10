@@ -349,14 +349,13 @@ public class CashInAndCashOutAction extends ActionSupport {
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
+		}
+		if (which.equals("i")) {
+			result = cashInAndCashOutService.updateCashIn(time, site, people, money, remark, itemId, subItemId, id,
+					accountId);
 		} else {
-			if (which.equals("i")) {
-				result = cashInAndCashOutService.updateCashIn(time, site, people, money, remark, itemId, subItemId, id,
-						accountId);
-			} else {
-				result = cashInAndCashOutService.updateCashOut(time, site, people, money, remark, itemId, subItemId, id,
-						accountId);
-			}
+			result = cashInAndCashOutService.updateCashOut(time, site, people, money, remark, itemId, subItemId, id,
+					accountId);
 		}
 		results.put("result", result);
 		writer.writeObject(results);
