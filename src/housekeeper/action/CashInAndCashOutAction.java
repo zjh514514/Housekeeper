@@ -43,6 +43,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	private Integer subItemId;
 	private Integer id;
 	private Integer accountId;
+	private String which;
 
 	public String getTime() {
 		return time;
@@ -124,19 +125,31 @@ public class CashInAndCashOutAction extends ActionSupport {
 		this.accountId = accountId;
 	}
 
+	public String getWhich() {
+		return which;
+	}
+
+	public void setWhich(String which) {
+		this.which = which;
+	}
+
 	/**
 	 * 增加一条收支记录
 	 * 
 	 * @throws Exception
 	 */
-	public void inSave() throws Exception {
+	public void save() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
+		Map<String, String> results = new HashMap<>();
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
 			time = jsonRequest.getString("time");
 			site = jsonRequest.getString("site");
 			people = jsonRequest.getString("people");
@@ -146,10 +159,16 @@ public class CashInAndCashOutAction extends ActionSupport {
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
+			if (which.equals("i")) {
+				result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId,
+						subItemId, accountId);
+			} else {
+				result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId,
+						subItemId, accountId);
+			}
+		} else {
+			result = "ERROR";
 		}
-		String result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId,
-				subItemId, accountId);
-		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
 		writer.flush();

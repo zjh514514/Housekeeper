@@ -20,7 +20,7 @@
 ##### 其他
 - SHA256 加密
 
-### 3.接口
+### 3.API
 
 #### item部分
 - 增加：
@@ -100,4 +100,27 @@ url:zjh.hduzjh.cn/HouseKeeper/item-get
         }
     }
 ]
+```
+#### cash部分
+- 增加
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/cash-save
+接口参数：
+{
+    which//String，i为保存收入，否则保存支出
+    time//时间，格式yyyy-MM-dd HH：mm
+    site//String，位置
+    people//String，成员
+    money//double，金额
+    remark//String，备注
+    memberId//int，保存的成员id
+    itemId//int，父类的id
+    subItemId//int，子类的id
+    accountId//int，账户的id
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
 ```
