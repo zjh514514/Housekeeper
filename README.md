@@ -5,10 +5,10 @@
 
 ### 2.技术栈
 
-##### **语言**
+##### 语言
 - java
 
-##### **框架**
+##### 框架
 - struts2 2.5.12
 - spring 4.3.8
 - hibernate 5.2.11
@@ -103,15 +103,59 @@ url:zjh.hduzjh.cn/HouseKeeper/item-get
 ```
 #### account部分
 - 查询
+
 ```
 url:zjh.hduzjh.cn/HouseKeeper/account-query
 接口参数：无
 返回结果：
 {
-    accountId//账户id
-    accountName//账户名字
+    accountId//int，账户id
+    accountName//String，账户名字
 }
 ```
+- 增加
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/account-add
+接口参数：
+{
+    accountName//String，账户名字
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 修改
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/account-update
+接口参数：
+{
+    id//int，修改的账户id
+    accountName//String，账户名字
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 删除
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/account-delete
+接口参数：
+{
+    id//int，删除的账户id
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+
+
+
 #### cash部分
 - 增加
 
@@ -135,6 +179,21 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-save
     result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
 }
 ```
+- 删除某条记录
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/cash-delete
+接口参数：
+{
+    which//String，i为删除收入，否则删除支出
+    id//int，删除的记录的id
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+
 
 - 查询某一成员收支记录
 
