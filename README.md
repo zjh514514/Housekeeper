@@ -122,7 +122,7 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-save
     which//String，i为保存收入，否则保存支出
     time//时间，格式yyyy-MM-dd HH：mm
     site//String，位置
-    people//String，成员
+    people//String，有关人员
     money//double，金额
     remark//String，备注
     memberId//int，保存的成员id
@@ -134,4 +134,56 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-save
 {
     result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
 }
+```
+
+- 查询某一成员收支记录
+
+```
+url:zjh.hduzjh.cn/HouseKeeper/cash-memberQuery
+接口参数：
+{
+    which//String，i为查询收入，否则查询支出
+    memberId//int，查询的成员id
+}
+返回结果：
+//收入查询
+[
+    {
+        "id": {
+            accountId//账户id
+            accountName//账户名称
+            cashinId//收入id
+            itemId//父类id
+            itemName//父类名称
+            memberId//成员id
+            money//金额
+            people//有关人员
+            remark//备注
+            site//地点
+            subitemId//子类id
+            subitemName//子类名称
+            time//时间，时间戳
+        }
+    }
+]
+//支出查询
+[
+    {
+        "id": {
+            accountId//账户id
+            accountName//账户名称
+            cashoutId//支出id
+            itemId//父类id
+            itemName//父类名称
+            memberId//成员id
+            money//金额
+            people//有关人员
+            remark//备注
+            site//地点
+            subitemId//子类id
+            subitemName//子类名称
+            time//时间，时间戳
+        }
+    }
+]
 ```
