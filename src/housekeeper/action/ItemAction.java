@@ -102,9 +102,11 @@ public class ItemAction extends ActionSupport {
 		JSONObject jsonRequest;
 		if (json != "") {
 			jsonRequest = JSONObject.fromObject(json);
+			System.out.println(jsonRequest);
 			which = jsonRequest.getString("which");
+			System.out.println(which);
 			// which是i时查询父类，否则查询子类
-			if (which == "i") {
+			if (which.equals("i")) {
 				type = jsonRequest.getInt("type");
 				List<Item> items = itemsService.queryItem(type);
 				writer.writeObject(items);
@@ -142,7 +144,7 @@ public class ItemAction extends ActionSupport {
 			jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			// which为i时修改父类，否则修改子类
-			if (which == "i") {
+			if (which.equals("i")) {
 				itemName = jsonRequest.getString("itemName");
 				id = jsonRequest.getInt("id");
 				result = itemsService.updateItem(itemName, id);
@@ -181,7 +183,7 @@ public class ItemAction extends ActionSupport {
 			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
 			// which为i时删除父类，否则删除子类
-			if (which == "i") {
+			if (which.equals("i")) {
 				result = itemsService.deleteItem(id);
 			} else {
 				result = itemsService.deleteSubItem(id);
@@ -215,7 +217,7 @@ public class ItemAction extends ActionSupport {
 			jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			// which为i时增加父类，否则增加子类
-			if (which == "i") {
+			if (which.equals("i")) {
 				itemName = jsonRequest.getString("itemName");
 				type = jsonRequest.getInt("type");
 				result = itemsService.addItems(itemName, type);
