@@ -60,4 +60,13 @@ public interface CashInDao {
 	 * @return
 	 */
 	public List<CashIn> queryById(Integer id);
+
+	/**
+	 * 查询某一成员某账户收入记录
+	 * 
+	 * @param accountId
+	 * @param memberId
+	 * @return
+	 */
+	public List<CashIn> queryByAccount(Integer accountId, Integer memberId);
 }

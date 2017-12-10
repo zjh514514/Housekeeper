@@ -383,4 +383,32 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 		}
 	}
 
+	@Override
+	public List<CashIn> queryCashInByAccount(Integer accountId, Integer memberId) {
+		if (accountId != null && memberId != null) {
+			List<CashIn> cashIns = cashInDao.queryByAccount(accountId, memberId);
+			if (cashIns.size() != 0) {
+				return cashIns;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<CashOut> queryCashOutByAccount(Integer accountId, Integer memberId) {
+		if (accountId != null && memberId != null) {
+			List<CashOut> cashOuts = cashOutDao.queryByAccount(accountId, memberId);
+			if (cashOuts.size() != 0) {
+				return cashOuts;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
 }

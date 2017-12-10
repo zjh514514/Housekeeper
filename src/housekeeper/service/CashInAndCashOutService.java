@@ -160,4 +160,22 @@ public interface CashInAndCashOutService {
 	 */
 	public List<CashOut> queryCashOutById(Integer id);
 
+	/**
+	 * 查询某一成员下某账户的收入记录
+	 * 
+	 * @param accountId
+	 * @param memberId
+	 * @return
+	 */
+	public List<CashIn> queryCashInByAccount(Integer accountId, Integer memberId);
+
+	/**
+	 * 查询某一成员下某账户的支出记录
+	 * 
+	 * @param accountId
+	 * @param memberId
+	 * @return
+	 */
+	public List<CashOut> queryCashOutByAccount(Integer accountId, Integer memberId);
+
 }

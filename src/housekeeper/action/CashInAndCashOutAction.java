@@ -1,5 +1,6 @@
 package housekeeper.action;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -363,4 +364,32 @@ public class CashInAndCashOutAction extends ActionSupport {
 		writer.close();
 	}
 
+	/**
+	 * 查询某一成员下某一账户收支记录
+	 * 
+	 * @throws Exception
+	 */
+	public void accountQuery() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		JSONWriter writer = new JSONWriter(response.getWriter());
+
+		String json = getStrResponse.getStrResponse();
+		if (json != "") {
+			JSONObject jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			accountId = jsonRequest.getInt("accountId");
+		}
+		if (which.equals("i")) {
+			List<CashIn> cashIns = cashInAndCashOutService.queryCashInByAccount(accountId, memberId);
+			writer.writeObject(cashIns);
+			writer.flush();
+			writer.close();
+		} else {
+			List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByAccount(accountId, memberId);
+			writer.writeObject(cashOuts);
+			writer.flush();
+			writer.close();
+		}
+	}
 }

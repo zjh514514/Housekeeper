@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.CashOutDao;
+import housekeeper.entities.CashIn;
 import housekeeper.entities.CashOut;
 import housekeeper.tools.HibernateTools;
 
@@ -56,6 +57,12 @@ public class CashOutDaoImpl extends HibernateTools implements CashOutDao {
 	public List<CashOut> queryById(Integer id) {
 		hql = "FROM CashOutQuery c WHERE c.id.cashoutId = ?";
 		return getSession().createQuery(hql).setParameter(0, id).list();
+	}
+
+	@Override
+	public List<CashOut> queryByAccount(Integer accountId, Integer memberId) {
+		hql = "FROM CashOutQuery c WHERE c.id.accountId = ? AND c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, accountId).setParameter(1, memberId).list();
 	}
 
 }

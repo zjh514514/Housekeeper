@@ -58,4 +58,10 @@ public class CashInDaoImpl extends HibernateTools implements CashInDao {
 		return getSession().createQuery(hql).setParameter(0, id).list();
 	}
 
+	@Override
+	public List<CashIn> queryByAccount(Integer accountId, Integer memberId) {
+		hql = "FROM CashInQuery c WHERE c.id.accountId = ? AND c.id.memberId = ?";
+		return getSession().createQuery(hql).setParameter(0, accountId).setParameter(1, memberId).list();
+	}
+
 }

@@ -2,6 +2,7 @@ package housekeeper.dao;
 
 import java.util.List;
 
+import housekeeper.entities.CashIn;
 import housekeeper.entities.CashOut;
 
 public interface CashOutDao {
@@ -60,4 +61,13 @@ public interface CashOutDao {
 	 * @return
 	 */
 	public List<CashOut> queryById(Integer id);
+
+	/**
+	 * 查询某一成员某账户支出记录
+	 * 
+	 * @param accountId
+	 * @param memberId
+	 * @return
+	 */
+	public List<CashOut> queryByAccount(Integer accountId, Integer memberId);
 }
