@@ -159,6 +159,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
+			System.out.println(time);
 			if (which.equals("i")) {
 				result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId,
 						subItemId, accountId);
@@ -176,54 +177,31 @@ public class CashInAndCashOutAction extends ActionSupport {
 	}
 
 	/**
-	 * 增加一条支出记录
+	 * 删除一条收支记录
 	 * 
 	 * @throws Exception
 	 */
-	public void outSave() throws Exception {
+	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			time = jsonRequest.getString("time");
-			site = jsonRequest.getString("site");
-			people = jsonRequest.getString("people");
-			money = jsonRequest.getDouble("money");
-			remark = jsonRequest.getString("remark");
-			memberId = jsonRequest.getInt("memberId");
-			itemId = jsonRequest.getInt("itemId");
-			subItemId = jsonRequest.getInt("subItemId");
-			accountId = jsonRequest.getInt("accountId");
-		}
-		String result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId,
-				subItemId, accountId);
+		String result = "";
 		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 删除一条收入记录
-	 * 
-	 * @throws Exception
-	 */
-	public void inDelete() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
+			if (which.equals("i")) {
+				result = cashInAndCashOutService.deleteCashIn(id);
+			} else {
+				result = cashInAndCashOutService.deleteCashOut(id);
+			}
+		} else {
+			result = "ERROR";
 		}
-		String result = cashInAndCashOutService.deleteCashIn(id);
-		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);
 		writer.flush();
@@ -231,72 +209,37 @@ public class CashInAndCashOutAction extends ActionSupport {
 	}
 
 	/**
-	 * 删除一条支出记录
+	 * 查询某一成员收支记录
 	 * 
 	 * @throws Exception
 	 */
-	public void outDelete() throws Exception {
+	public void memberQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			id = jsonRequest.getInt("id");
-		}
-		String result = cashInAndCashOutService.deleteCashOut(id);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 查询某一成员收入记录
-	 * 
-	 * @throws Exception
-	 */
-	public void inMemberQuery() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
 			memberId = jsonRequest.getInt("memberId");
+			if (which.equals("i")) {
+				List<CashIn> cashIns = cashInAndCashOutService.queryCashInByMember(memberId);
+				writer.writeObject(cashIns);
+				writer.flush();
+				writer.close();
+			} else {
+				List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByMember(memberId);
+				writer.writeObject(cashOuts);
+				writer.flush();
+				writer.close();
+			}
+		} else {
+			writer.writeObject(null);
+			writer.flush();
+			writer.close();
 		}
-		List<CashIn> cashIns = cashInAndCashOutService.queryCashInByMember(memberId);
-
-		System.out.println(cashIns);
-		writer.writeObject(cashIns);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 查询某一成员支出记录
-	 * 
-	 * @throws Exception
-	 */
-	public void outMemberQuery() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			memberId = jsonRequest.getInt("memberId");
-		}
-		List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByMember(memberId);
-
-		System.out.println(cashOuts);
-		writer.writeObject(cashOuts);
-		writer.flush();
-		writer.close();
 	}
 
 	/**

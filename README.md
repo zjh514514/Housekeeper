@@ -101,6 +101,17 @@ url:zjh.hduzjh.cn/HouseKeeper/item-get
     }
 ]
 ```
+#### account部分
+- 查询
+```
+url:zjh.hduzjh.cn/HouseKeeper/account-query
+接口参数：无
+返回结果：
+{
+    accountId//账户id
+    accountName//账户名字
+}
+```
 #### cash部分
 - 增加
 

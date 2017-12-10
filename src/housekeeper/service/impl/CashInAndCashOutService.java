@@ -100,7 +100,7 @@ public class CashInAndCashOutService implements housekeeper.service.CashInAndCas
 			if (time == null) {
 				date = new Date();
 			} else {
-				date = new SimpleDateFormat().parse(time);
+				date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time);
 			}
 			if (site == null)
 				site = "";

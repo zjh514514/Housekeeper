@@ -23,6 +23,7 @@ import housekeeper.dao.FamilyDao;
 import housekeeper.dao.ItemDao;
 import housekeeper.dao.MemberDao;
 import housekeeper.dao.SubItemDao;
+import housekeeper.entities.Account;
 import housekeeper.entities.Card;
 import housekeeper.entities.CashIn;
 import housekeeper.entities.CashOut;
@@ -384,15 +385,16 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testCashOutSave() throws ParseException {
 		Member member = new Member();
-		member.setMemberId(6);
+		member.setMemberId(3);
 		Item item = new Item();
 		item.setItemId(1);
 		SubItem subItem = new SubItem();
 		subItem.setSubItemId(13);
-
-		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		// String dstr = "2017-10-10";
-		Date time = new Date();
+		Account account=new Account();
+		account.setAccountId(1);
+		
+		String date = "2017-12-10 16:18";
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 		CashOut cashOut = new CashOut();
 		cashOut.setItem(item);
@@ -402,7 +404,8 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 		cashOut.setRemark("aa");
 		cashOut.setSite("aa");
 		cashOut.setSubItem(subItem);
-		cashOut.setTime(time);
+		cashOut.setTime(f.parse(date));
+		cashOut.setAccount(account);
 
 		cashOutDao.save(cashOut);
 	}
