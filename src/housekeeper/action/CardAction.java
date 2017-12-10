@@ -92,7 +92,7 @@ public class CardAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void cardSave() throws Exception {
+	public void save() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
@@ -120,7 +120,7 @@ public class CardAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void cardDelete() throws Exception {
+	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
@@ -144,7 +144,7 @@ public class CardAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void cardUpdate() throws Exception {
+	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
@@ -172,7 +172,7 @@ public class CardAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void cardMemberQuery() throws Exception {
+	public void memberQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
@@ -194,7 +194,7 @@ public class CardAction extends ActionSupport {
 	 * 
 	 * @throws Exception
 	 */
-	public void cardIdQuery() throws Exception {
+	public void idQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
