@@ -160,15 +160,13 @@ public class CashInAndCashOutAction extends ActionSupport {
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
 			System.out.println(time);
-			if (which.equals("i")) {
-				result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId,
-						subItemId, accountId);
-			} else {
-				result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId,
-						subItemId, accountId);
-			}
+		}
+		if (which.equals("i")) {
+			result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId, subItemId,
+					accountId);
 		} else {
-			result = "ERROR";
+			result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId, subItemId,
+					accountId);
 		}
 		results.put("result", result);
 		writer.writeObject(results);
@@ -194,13 +192,11 @@ public class CashInAndCashOutAction extends ActionSupport {
 			jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
-			if (which.equals("i")) {
-				result = cashInAndCashOutService.deleteCashIn(id);
-			} else {
-				result = cashInAndCashOutService.deleteCashOut(id);
-			}
+		}
+		if (which.equals("i")) {
+			result = cashInAndCashOutService.deleteCashIn(id);
 		} else {
-			result = "ERROR";
+			result = cashInAndCashOutService.deleteCashOut(id);
 		}
 		results.put("result", result);
 		writer.writeObject(results);
@@ -224,19 +220,15 @@ public class CashInAndCashOutAction extends ActionSupport {
 			jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			memberId = jsonRequest.getInt("memberId");
-			if (which.equals("i")) {
-				List<CashIn> cashIns = cashInAndCashOutService.queryCashInByMember(memberId);
-				writer.writeObject(cashIns);
-				writer.flush();
-				writer.close();
-			} else {
-				List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByMember(memberId);
-				writer.writeObject(cashOuts);
-				writer.flush();
-				writer.close();
-			}
+		}
+		if (which.equals("i")) {
+			List<CashIn> cashIns = cashInAndCashOutService.queryCashInByMember(memberId);
+			writer.writeObject(cashIns);
+			writer.flush();
+			writer.close();
 		} else {
-			writer.writeObject(null);
+			List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByMember(memberId);
+			writer.writeObject(cashOuts);
 			writer.flush();
 			writer.close();
 		}
@@ -257,19 +249,15 @@ public class CashInAndCashOutAction extends ActionSupport {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
-			if (which.equals("i")) {
-				List<CashIn> cashIns = cashInAndCashOutService.queryCashInById(id);
-				writer.writeObject(cashIns);
-				writer.flush();
-				writer.close();
-			} else {
-				List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutById(id);
-				writer.writeObject(cashOuts);
-				writer.flush();
-				writer.close();
-			}
+		}
+		if (which.equals("i")) {
+			List<CashIn> cashIns = cashInAndCashOutService.queryCashInById(id);
+			writer.writeObject(cashIns);
+			writer.flush();
+			writer.close();
 		} else {
-			writer.writeObject(null);
+			List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutById(id);
+			writer.writeObject(cashOuts);
 			writer.flush();
 			writer.close();
 		}
@@ -291,23 +279,18 @@ public class CashInAndCashOutAction extends ActionSupport {
 			which = jsonRequest.getString("which");
 			itemId = jsonRequest.getInt("itemId");
 			memberId = jsonRequest.getInt("memberId");
-			if (which.equals("i")) {
-				List<CashIn> cashIns = cashInAndCashOutService.queryCashInByItem(itemId, memberId);
-				writer.writeObject(cashIns);
-				writer.flush();
-				writer.close();
-			} else {
-				List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByItem(itemId, memberId);
-				writer.writeObject(cashOuts);
-				writer.flush();
-				writer.close();
-			}
+		}
+		if (which.equals("i")) {
+			List<CashIn> cashIns = cashInAndCashOutService.queryCashInByItem(itemId, memberId);
+			writer.writeObject(cashIns);
+			writer.flush();
+			writer.close();
 		} else {
-			writer.writeObject(null);
+			List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutByItem(itemId, memberId);
+			writer.writeObject(cashOuts);
 			writer.flush();
 			writer.close();
 		}
-
 	}
 
 	/**
@@ -326,19 +309,15 @@ public class CashInAndCashOutAction extends ActionSupport {
 			which = jsonRequest.getString("which");
 			subItemId = jsonRequest.getInt("subItemId");
 			memberId = jsonRequest.getInt("memberId");
-			if (which.equals("i")) {
-				List<CashIn> cashIns = cashInAndCashOutService.queryCashInBySubItem(subItemId, memberId);
-				writer.writeObject(cashIns);
-				writer.flush();
-				writer.close();
-			} else {
-				List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutBySubItem(subItemId, memberId);
-				writer.writeObject(cashOuts);
-				writer.flush();
-				writer.close();
-			}
+		}
+		if (which.equals("i")) {
+			List<CashIn> cashIns = cashInAndCashOutService.queryCashInBySubItem(subItemId, memberId);
+			writer.writeObject(cashIns);
+			writer.flush();
+			writer.close();
 		} else {
-			writer.writeObject(null);
+			List<CashOut> cashOuts = cashInAndCashOutService.queryCashOutBySubItem(subItemId, memberId);
+			writer.writeObject(cashOuts);
 			writer.flush();
 			writer.close();
 		}
@@ -370,6 +349,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 			itemId = jsonRequest.getInt("itemId");
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
+		} else {
 			if (which.equals("i")) {
 				result = cashInAndCashOutService.updateCashIn(time, site, people, money, remark, itemId, subItemId, id,
 						accountId);
@@ -377,8 +357,6 @@ public class CashInAndCashOutAction extends ActionSupport {
 				result = cashInAndCashOutService.updateCashOut(time, site, people, money, remark, itemId, subItemId, id,
 						accountId);
 			}
-		} else {
-			result = "ERROR";
 		}
 		results.put("result", result);
 		writer.writeObject(results);

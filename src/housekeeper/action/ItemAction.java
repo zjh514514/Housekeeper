@@ -120,9 +120,18 @@ public class ItemAction extends ActionSupport {
 				writer.close();
 			}
 		} else {
-			writer.writeObject(null);
-			writer.flush();
-			writer.close();
+			// which是i时查询父类，否则查询子类
+			if (which.equals("i")) {
+				List<Item> items = itemsService.queryItem(type);
+				writer.writeObject(items);
+				writer.flush();
+				writer.close();
+			} else {
+				List<SubItem> subItems = itemsService.querySubItem(itemId);
+				writer.writeObject(subItems);
+				writer.flush();
+				writer.close();
+			}
 		}
 	}
 
@@ -154,11 +163,13 @@ public class ItemAction extends ActionSupport {
 				result = itemsService.updateSubItem(subItemName, id);
 			}
 			results.put("result", result);
-			writer.writeObject(results);
-			writer.flush();
-			writer.close();
 		} else {
-			results.put("result", "ERROR");
+			if (which.equals("i")) {
+				result = itemsService.updateItem(itemName, id);
+			} else {
+				result = itemsService.updateSubItem(subItemName, id);
+			}
+			results.put("result", result);
 		}
 		writer.writeObject(results);
 		writer.flush();
@@ -183,19 +194,14 @@ public class ItemAction extends ActionSupport {
 			jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
-			// which为i时删除父类，否则删除子类
-			if (which.equals("i")) {
-				result = itemsService.deleteItem(id);
-			} else {
-				result = itemsService.deleteSubItem(id);
-			}
-			results.put("result", result);
-			writer.writeObject(results);
-			writer.flush();
-			writer.close();
-		} else {
-			results.put("result", "ERROR");
 		}
+		// which为i时删除父类，否则删除子类
+		if (which.equals("i")) {
+			result = itemsService.deleteItem(id);
+		} else {
+			result = itemsService.deleteSubItem(id);
+		}
+		results.put("result", result);
 		writer.writeObject(results);
 		writer.flush();
 		writer.close();
@@ -230,7 +236,12 @@ public class ItemAction extends ActionSupport {
 			}
 			results.put("result", result);
 		} else {
-			results.put("result", "ERROR");
+			if (which.equals("i")) {
+				result = itemsService.addItems(itemName, type);
+			} else {
+				result = itemsService.addSubItems(subItemName, itemId);
+			}
+			results.put("result", result);
 		}
 		writer.writeObject(results);
 		writer.flush();
