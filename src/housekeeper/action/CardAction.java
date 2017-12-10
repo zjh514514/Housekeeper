@@ -94,6 +94,7 @@ public class CardAction extends ActionSupport {
 	 */
 	public void save() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -122,6 +123,7 @@ public class CardAction extends ActionSupport {
 	 */
 	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -146,6 +148,7 @@ public class CardAction extends ActionSupport {
 	 */
 	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -174,6 +177,7 @@ public class CardAction extends ActionSupport {
 	 */
 	public void memberQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -196,6 +200,7 @@ public class CardAction extends ActionSupport {
 	 */
 	public void idQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 

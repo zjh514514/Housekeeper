@@ -42,6 +42,7 @@ public class LoginAction extends ActionSupport {
 	private String familyName;
 	private Integer memberId;
 	private Double balance;
+	private String which;
 
 	public String getUsername() {
 		return username;
@@ -107,49 +108,37 @@ public class LoginAction extends ActionSupport {
 		this.balance = balance;
 	}
 
-	/**
-	 * 成员登陆
-	 * 
-	 * @throws Exception
-	 */
-	public void memberLogin() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
+	public String getWhich() {
+		return which;
+	}
 
-		String json = getStrResponse.getStrResponse();
-		System.out.println(json);
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			username = jsonRequest.getString("username");
-			password = jsonRequest.getString("password");
-		}
-		System.out.println(username + "," + password);
-		String result = familyAndMemberService.memberLogin(username, password);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
+	public void setWhich(String which) {
+		this.which = which;
 	}
 
 	/**
-	 * 家庭登陆
+	 * 登陆
 	 * 
 	 * @throws Exception
 	 */
-	public void familyLogin() throws Exception {
+	public void login() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
 		String json = getStrResponse.getStrResponse();
 		if (json != "") {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
 			username = jsonRequest.getString("username");
 			password = jsonRequest.getString("password");
 		}
-		String result = familyAndMemberService.familyLogin(username, password);
+		if (which.equals("m")) {
+			result = familyAndMemberService.memberLogin(username, password);
+		} else {
+			result = familyAndMemberService.familyLogin(username, password);
+		}
 		Map<String, String> results = new HashMap<>();
 		results.put("result", result);
 		writer.writeObject(results);

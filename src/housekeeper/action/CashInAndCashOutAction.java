@@ -1,6 +1,5 @@
 package housekeeper.action;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,6 +140,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void save() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -182,6 +182,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -212,6 +213,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void memberQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -242,6 +244,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void idQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -271,6 +274,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void itemQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -301,6 +305,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void subItemQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -331,6 +336,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -371,6 +377,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 	 */
 	public void accountQuery() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 

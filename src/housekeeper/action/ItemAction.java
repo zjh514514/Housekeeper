@@ -95,6 +95,7 @@ public class ItemAction extends ActionSupport {
 	 */
 	public void get() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -142,6 +143,7 @@ public class ItemAction extends ActionSupport {
 	 */
 	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -183,6 +185,7 @@ public class ItemAction extends ActionSupport {
 	 */
 	public void delete() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
@@ -214,6 +217,7 @@ public class ItemAction extends ActionSupport {
 	 */
 	public void add() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
