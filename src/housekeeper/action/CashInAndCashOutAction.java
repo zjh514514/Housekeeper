@@ -379,6 +379,7 @@ public class CashInAndCashOutAction extends ActionSupport {
 			JSONObject jsonRequest = JSONObject.fromObject(json);
 			which = jsonRequest.getString("which");
 			accountId = jsonRequest.getInt("accountId");
+			memberId = jsonRequest.getInt("memberId");
 		}
 		if (which.equals("i")) {
 			List<CashIn> cashIns = cashInAndCashOutService.queryCashInByAccount(accountId, memberId);
