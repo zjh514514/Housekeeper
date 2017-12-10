@@ -38,6 +38,7 @@ public class ItemAction extends ActionSupport {
 	private String itemName;
 	private String subItemName;
 	private Integer itemId;
+	private String which;
 
 	public void setType(Integer type) {
 		this.type = type;
@@ -79,189 +80,159 @@ public class ItemAction extends ActionSupport {
 		this.itemId = itemId;
 	}
 
-	/**
-	 * 查询收入或支出父类
-	 * 
-	 * @throws Exception
-	 */
-	public void itemGet() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
+	public String getWhich() {
+		return which;
+	}
 
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			type = jsonRequest.getInt("type");
-		}
-		List<Item> items = itemsService.queryItem(type);
-
-		writer.writeObject(items);
-		writer.flush();
-		writer.close();
+	public void setWhich(String which) {
+		this.which = which;
 	}
 
 	/**
-	 * 查询某一父类下的子类
+	 * 查询父类或子类
 	 * 
 	 * @throws Exception
 	 */
-	public void subItemGet() throws Exception {
+	public void get() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			itemId = jsonRequest.getInt("itemId");
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			// which是i时查询父类，否则查询子类
+			if (which == "i") {
+				type = jsonRequest.getInt("type");
+				List<Item> items = itemsService.queryItem(type);
+				writer.writeObject(items);
+				writer.flush();
+				writer.close();
+			} else {
+				itemId = jsonRequest.getInt("itemId");
+				List<SubItem> subItems = itemsService.querySubItem(itemId);
+				writer.writeObject(subItems);
+				writer.flush();
+				writer.close();
+			}
+		} else {
+			writer.writeObject(null);
+			writer.flush();
+			writer.close();
 		}
-		List<SubItem> subItems = itemsService.querySubItem(itemId);
-
-		writer.writeObject(subItems);
-		writer.flush();
-		writer.close();
 	}
 
 	/**
-	 * 修改某一父类名称
+	 * 修改父类或子类名称
 	 * 
 	 * @throws Exception
 	 */
-	public void itemUpdate() throws Exception {
+	public void update() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
+		String result = "";
+		Map<String, String> results = new HashMap<>();
 		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
 		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			itemName = jsonRequest.getString("itemName");
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			// which为i时修改父类，否则修改子类
+			if (which == "i") {
+				itemName = jsonRequest.getString("itemName");
+				id = jsonRequest.getInt("id");
+				result = itemsService.updateItem(itemName, id);
+			} else {
+				subItemName = jsonRequest.getString("subItemName");
+				id = jsonRequest.getInt("id");
+				result = itemsService.updateSubItem(subItemName, id);
+			}
+			results.put("results", result);
+			writer.writeObject(results);
+			writer.flush();
+			writer.close();
+		} else {
+			writer.writeObject(null);
+			writer.flush();
+			writer.close();
+		}
+	}
+
+	/**
+	 * 删除父类或子类
+	 * 
+	 * @throws Exception
+	 */
+	public void delete() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		JSONWriter writer = new JSONWriter(response.getWriter());
+
+		String result = "";
+		Map<String, String> results = new HashMap<>();
+		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
+		if (json != "") {
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
 			id = jsonRequest.getInt("id");
+			// which为i时删除父类，否则删除子类
+			if (which == "i") {
+				result = itemsService.deleteItem(id);
+			} else {
+				result = itemsService.deleteSubItem(id);
+			}
+			results.put("result", result);
+			writer.writeObject(results);
+			writer.flush();
+			writer.close();
+		} else {
+			writer.writeObject(null);
+			writer.flush();
+			writer.close();
 		}
-		String result = itemsService.updateItem(itemName, id);
-		Map<String, String> results = new HashMap<>();
-		results.put("results", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
 	}
 
 	/**
-	 * 修改某一子类名称
+	 * 增加父类或子类
 	 * 
 	 * @throws Exception
 	 */
-	public void subItemUpdate() throws Exception {
+	public void add() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");
 		JSONWriter writer = new JSONWriter(response.getWriter());
 
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			subItemName = jsonRequest.getString("subItemName");
-			id = jsonRequest.getInt("id");
-		}
-		String result = itemsService.updateSubItem(subItemName, id);
+		String result = "";
 		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
+		String json = getStrResponse.getStrResponse();
+		JSONObject jsonRequest;
+		if (json != "") {
+			jsonRequest = JSONObject.fromObject(json);
+			which = jsonRequest.getString("which");
+			// which为i时增加父类，否则增加子类
+			if (which == "i") {
+				itemName = jsonRequest.getString("itemName");
+				type = jsonRequest.getInt("type");
+				result = itemsService.addItems(itemName, type);
+			} else {
+				subItemName = jsonRequest.getString("subItemName");
+				itemId = jsonRequest.getInt("itemId");
+				result = itemsService.addSubItems(subItemName, itemId);
+			}
+			results.put("result", result);
+			writer.writeObject(results);
+			writer.flush();
+			writer.close();
+		} else {
+			writer.writeObject(null);
+			writer.flush();
+			writer.close();
+		}
 	}
 
-	/**
-	 * 删除某一父类
-	 * 
-	 * @throws Exception
-	 */
-	public void itemDelete() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			id = jsonRequest.getInt("id");
-		}
-		String result = itemsService.deleteItem(id);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 删除某一子类
-	 * 
-	 * @throws Exception
-	 */
-	public void subItemDelete() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			id = jsonRequest.getInt("id");
-		}
-		String result = itemsService.deleteSubItem(id);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 增加某一父类
-	 * 
-	 * @throws Exception
-	 */
-	public void itemAdd() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			itemName = jsonRequest.getString("itemName");
-			type = jsonRequest.getInt("type");
-		}
-		String result = itemsService.addItems(itemName, type);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
-
-	/**
-	 * 增加某一父类下的子类
-	 * 
-	 * @throws Exception
-	 */
-	public void subItemAdd() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		JSONWriter writer = new JSONWriter(response.getWriter());
-
-		String json = getStrResponse.getStrResponse();
-		if (json != "") {
-			JSONObject jsonRequest = JSONObject.fromObject(json);
-			subItemName = jsonRequest.getString("subItemName");
-			itemId = jsonRequest.getInt("itemId");
-		}
-		String result = itemsService.addSubItems(subItemName, itemId);
-		Map<String, String> results = new HashMap<>();
-		results.put("result", result);
-		writer.writeObject(results);
-		writer.flush();
-		writer.close();
-	}
 }
