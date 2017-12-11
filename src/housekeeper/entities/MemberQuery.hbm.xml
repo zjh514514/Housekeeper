@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2017-12-11 20:27:20 by Hibernate Tools 5.2.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class catalog="GuanJiapo" dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="housekeeper.entities.MemberQuery"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="MemberQuery">
+		<composite-id class="housekeeper.entities.MemberQueryId"
+			mapped="false" name="id" unsaved-value="undefined">
+			<key-property name="memberId" type="int">
+				<column name="MEMBER_ID" />
+			</key-property>
+			<key-property name="name" type="string">
+				<column name="NAME" />
+			</key-property>
+			<key-property name="username" type="string">
+				<column name="USERNAME" />
+			</key-property>
+			<key-property name="password" type="string">
+				<column name="PASSWORD" />
+			</key-property>
+			<key-property name="balance" type="java.lang.Double">
+				<column name="BALANCE" precision="22" scale="0" />
+			</key-property>
+			<key-property name="role" type="string">
+				<column name="ROLE" />
+			</key-property>
+			<key-property name="familyId" type="int">
+				<column name="FAMILY_ID" />
+			</key-property>
+			<key-property name="familyName" type="string">
+				<column name="FAMILY_NAME" />
+			</key-property>
+		</composite-id>
+	</class>
+</hibernate-mapping>
