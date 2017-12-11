@@ -233,14 +233,14 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testMemberQueryById() {
-		System.out.println(memberDao.queryById(1));
+		System.out.println(memberDao.queryById(3));
 	}
 
 	@Test
 	public void testMemberQueryByFamily() {
 		Family family = new Family();
 		family.setFamilyId(1);
-		System.out.println(memberDao.queryByFamily(family));
+		System.out.println(memberDao.queryByFamily(1));
 	}
 
 	/**

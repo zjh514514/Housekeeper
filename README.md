@@ -9,9 +9,9 @@
 - java
 
 ##### **框架**
-- struts2 2.5.12
-- spring 4.3.8
-- hibernate 5.2.11
+- Struts2 2.5.12
+- Spring 4.3.8
+- Hibernate 5.2.11
 
 ##### 插件
 - FastJson
@@ -22,7 +22,7 @@
 
 ### 3.API
 
-#### item部分
+> #### item部分
 - 增加：
 
 ```
@@ -101,7 +101,7 @@ url:zjh.hduzjh.cn/HouseKeeper/item-get
     }
 ]
 ```
-#### account部分
+> #### account部分
 - 查询
 
 ```
@@ -156,7 +156,7 @@ url:zjh.hduzjh.cn/HouseKeeper/account-delete
 
 
 
-#### cash部分
+> #### cash部分
 - 增加
 
 ```
@@ -470,6 +470,130 @@ url:zjh.hduzjh.cn/cash-accountQuery
             subitemId//子类id
             subitemName//子类名称
             time//时间，时间戳
+        }
+    }
+]
+```
+> #### 家庭成员部分
+- 登陆
+
+```
+url:zjh.hduzjh.cn/login-login
+接口参数：
+{
+    which//String，m为成员登陆，f为家庭登陆
+    username//String，用户名
+    password//String，密码
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 注册
+
+```
+url:zjh.hduzjh.cn/login-sign
+接口参数：
+{
+    which//String，m为成员注册，f为家庭注册
+    username//String，用户名
+    password//String，密码
+    role//String，成员角色，家庭注册则为空
+    id//int，若成员注册则为家庭id，家庭注册则为空
+    familyName//String，家庭名称，成员注册则为空
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 删除
+
+```
+url:zjh.hduzjh.cn/login-delete
+接口参数：
+{
+    which//String，m为成员删除，f为家庭删除
+    id//int，删除的成员或家庭id
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 修改
+
+```
+url:zjh.hduzjh.cn/login-update
+接口参数：
+{
+    which//String，m为成员修改，f为家庭修改
+    password//String，修改后的密码
+    id//int，修改的成员或家庭id
+    role//String，修改后成员角色，家庭修改则为空
+    balance//double，修改后成员余额，家庭修改则为空
+    name//String，修改后的成员姓名，家庭修改则为空
+    familyName//String，修改后的家庭名称，成员修改则为空
+}
+返回结果：
+{
+    result//成功为SUCCESS，失败为FAILED，参数错误为ERROR
+}
+```
+- 获取某一家庭或成员信息
+
+```
+url:zjh.hduzjh.cn/login-idGet
+接口参数：
+{
+    which//String，m为成员信息获取，f为家庭信息获取
+    id//int，获取的成员或家庭id
+}
+返回结果：
+//获取成员信息
+[
+    {
+        "id": {
+            memberId//成员id
+            name//成员名字
+            username//成员用户名
+            password//成员密码
+            balance//账户余额
+            role//成员角色
+            familyId//所属家庭id
+            familyName//所属家庭名称
+        }
+    }
+]
+//获取家庭信息
+{
+    familyId//家庭id
+    familyName//家庭名称
+    username//用户名
+    password//密码
+}
+```
+- 获取某家庭所有成员
+
+```
+url:zjh.hduzjh.cn/login-familyGet
+接口参数：
+{
+    id//所属家庭id
+}
+返回结果：
+[
+    {
+        "id": {
+            memberId//成员id
+            name//成员名字
+            username//成员用户名
+            password//成员密码
+            balance//账户余额
+            role//成员角色
+            familyId//所属家庭id
+            familyName//所属家庭名称
         }
     }
 ]

@@ -57,5 +57,5 @@ public interface MemberDao {
 	 * @param family
 	 * @return
 	 */
-	public List<Member> queryByFamily(Family family);
+	public List<Member> queryByFamily(Integer familyId);
 }

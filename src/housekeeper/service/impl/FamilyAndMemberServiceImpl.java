@@ -225,8 +225,8 @@ public class FamilyAndMemberServiceImpl implements FamilyAndMemberService {
 	@Override
 	public List<Member> memberFamilyGet(Integer familyId) {
 		if (familyId != null && familyDao.queryById(familyId).size() != 0) {
-			family.setFamilyId(familyId);
-			List<Member> members = memberDao.queryByFamily(family);
+			// family.setFamilyId(familyId);
+			List<Member> members = memberDao.queryByFamily(familyId);
 			if (members.size() != 0) {
 				return members;
 			} else {

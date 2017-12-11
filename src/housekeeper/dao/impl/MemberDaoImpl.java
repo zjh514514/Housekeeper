@@ -35,7 +35,7 @@ public class MemberDaoImpl extends HibernateTools implements MemberDao {
 
 	@Override
 	public List<Member> getAll() {
-		hql = "FROM Member";
+		hql = "FROM MemberQuery";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -47,14 +47,14 @@ public class MemberDaoImpl extends HibernateTools implements MemberDao {
 
 	@Override
 	public List<Member> queryById(Integer id) {
-		hql = "FROM Member m WHERE m.memberId = ?";
+		hql = "FROM MemberQuery m WHERE m.id.memberId = ?";
 		return getSession().createQuery(hql).setParameter(0, id).list();
 	}
 
 	@Override
-	public List<Member> queryByFamily(Family family) {
-		hql = "FROM Member m WHERE m.family = ?";
-		return getSession().createQuery(hql).setParameter(0, family).list();
+	public List<Member> queryByFamily(Integer familyId) {
+		hql = "FROM MemberQuery m WHERE m.id.familyId = ?";
+		return getSession().createQuery(hql).setParameter(0, familyId).list();
 	}
 
 }
