@@ -2,6 +2,7 @@ package housekeeper.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -29,6 +30,15 @@ public class ServiceTest {
 	private CardService cardService;
 	@Resource
 	private CashInAndCashOutService cashInAndCashOutServoice;
+
+	@Test
+	public void test2() throws Exception {
+		String time2 = "1513058904";
+		Long time = new Long(time2);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String date = format.format(time * 1000L);
+		System.out.println(date);
+	}
 
 	@Test
 	public void test() {

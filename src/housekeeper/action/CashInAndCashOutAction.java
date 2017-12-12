@@ -1,5 +1,6 @@
 package housekeeper.action;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,12 +163,14 @@ public class CashInAndCashOutAction extends ActionSupport {
 			accountId = jsonRequest.getInt("accountId");
 			System.out.println(time);
 		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Long date = new Long(time);
 		if (which.equals("i")) {
-			result = cashInAndCashOutService.addCashIn(time, site, people, money, remark, memberId, itemId, subItemId,
-					accountId);
+			result = cashInAndCashOutService.addCashIn(format.format(date * 1000L), site, people, money, remark,
+					memberId, itemId, subItemId, accountId);
 		} else {
-			result = cashInAndCashOutService.addCashOut(time, site, people, money, remark, memberId, itemId, subItemId,
-					accountId);
+			result = cashInAndCashOutService.addCashOut(format.format(date * 1000L), site, people, money, remark,
+					memberId, itemId, subItemId, accountId);
 		}
 		results.put("result", result);
 		writer.writeObject(results);
@@ -357,12 +360,14 @@ public class CashInAndCashOutAction extends ActionSupport {
 			subItemId = jsonRequest.getInt("subItemId");
 			accountId = jsonRequest.getInt("accountId");
 		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Long date = new Long(time);
 		if (which.equals("i")) {
-			result = cashInAndCashOutService.updateCashIn(time, site, people, money, remark, itemId, subItemId, id,
-					accountId);
+			result = cashInAndCashOutService.updateCashIn(format.format(date * 1000L), site, people, money, remark,
+					itemId, subItemId, id, accountId);
 		} else {
-			result = cashInAndCashOutService.updateCashOut(time, site, people, money, remark, itemId, subItemId, id,
-					accountId);
+			result = cashInAndCashOutService.updateCashOut(format.format(date * 1000L), site, people, money, remark,
+					itemId, subItemId, id, accountId);
 		}
 		results.put("result", result);
 		writer.writeObject(results);
