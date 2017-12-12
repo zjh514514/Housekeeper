@@ -164,7 +164,7 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-save
 接口参数：
 {
     which//String，i为保存收入，否则保存支出
-    time//时间，格式yyyy-MM-dd HH：mm
+    time//String，时间戳
     site//String，位置
     people//String，有关人员
     money//double，金额
@@ -200,7 +200,7 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-update
 接口参数：
 {
     which//String，i为保存收入，否则保存支出
-    time//时间，格式yyyy-MM-dd HH：mm
+    time//String，时间戳
     site//String，位置
     people//String，有关人员
     money//double，金额
