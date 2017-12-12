@@ -57,4 +57,16 @@ public class MemberDaoImpl extends HibernateTools implements MemberDao {
 		return getSession().createQuery(hql).setParameter(0, familyId).list();
 	}
 
+	@Override
+	public double sumCashIn(Integer id) {
+		hql = "SELECT SUM(c.id.money) FROM CashInQuery c WHERE c.id.memberId = ?";
+		return (double) getSession().createQuery(hql).setParameter(0, id).list().get(0);
+	}
+
+	@Override
+	public double sumCashOut(Integer id) {
+		hql = "SELECT SUM(c.id.money) FROM CashOutQuery c WHERE c.id.memberId = ?";
+		return (double) getSession().createQuery(hql).setParameter(0, id).list().get(0);
+	}
+
 }

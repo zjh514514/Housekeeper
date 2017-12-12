@@ -2,7 +2,6 @@ package housekeeper.dao;
 
 import java.util.List;
 
-import housekeeper.entities.Family;
 import housekeeper.entities.Member;
 
 public interface MemberDao {
@@ -58,4 +57,20 @@ public interface MemberDao {
 	 * @return
 	 */
 	public List<Member> queryByFamily(Integer familyId);
+
+	/**
+	 * 计算某成员总收入
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public double sumCashIn(Integer id);
+
+	/**
+	 * 计算某成员总支出
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public double sumCashOut(Integer id);
 }

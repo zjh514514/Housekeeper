@@ -243,6 +243,16 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 		System.out.println(memberDao.queryByFamily(1));
 	}
 
+	@Test
+	public void testMemberSumCashIn() {
+		System.out.println(memberDao.sumCashIn(3));
+	}
+
+	@Test
+	public void testMemberSumCashOut() {
+		System.out.println(memberDao.sumCashOut(3));
+	}
+
 	/**
 	 * ����CardDao
 	 */
@@ -390,9 +400,9 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 		item.setItemId(1);
 		SubItem subItem = new SubItem();
 		subItem.setSubItemId(13);
-		Account account=new Account();
+		Account account = new Account();
 		account.setAccountId(1);
-		
+
 		String date = "2017-12-10 16:18";
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
