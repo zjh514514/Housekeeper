@@ -1,11 +1,11 @@
 package housekeeper.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import housekeeper.dao.MemberDao;
-import housekeeper.entities.Family;
 import housekeeper.entities.Member;
 import housekeeper.tools.HibernateTools;
 
@@ -58,15 +58,15 @@ public class MemberDaoImpl extends HibernateTools implements MemberDao {
 	}
 
 	@Override
-	public double sumCashIn(Integer id) {
-		hql = "SELECT SUM(c.id.money) FROM CashInQuery c WHERE c.id.memberId = ?";
-		return (double) getSession().createQuery(hql).setParameter(0, id).list().get(0);
+	public double sumCashIn(Integer id, Date time) {
+		hql = "SELECT SUM(c.id.money) FROM CashInQuery c WHERE c.id.memberId = ? AND c.id.time = ?";
+		return (double) getSession().createQuery(hql).setParameter(0, id).setParameter(1, time).list().get(0);
 	}
 
 	@Override
-	public double sumCashOut(Integer id) {
-		hql = "SELECT SUM(c.id.money) FROM CashOutQuery c WHERE c.id.memberId = ?";
-		return (double) getSession().createQuery(hql).setParameter(0, id).list().get(0);
+	public double sumCashOut(Integer id, String time) {
+		hql = "SELECT SUM(c.id.money) FROM CashOutQuery c WHERE c.id.memberId = ? AND c.id.time LIKE %?%";
+		return (double) getSession().createQuery(hql).setParameter(0, id).setParameter(1, time).list().get(0);
 	}
 
 }

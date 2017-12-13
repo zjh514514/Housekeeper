@@ -244,8 +244,11 @@ public class DaoTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	@Test
-	public void testMemberSumCashIn() {
-		System.out.println(memberDao.sumCashIn(3));
+	public void testMemberSumCashIn() throws Exception {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String str="2017-01-01 10:00:00";
+		Date date=sdf.parse(str);
+		System.out.println(memberDao.sumCashIn(3,date));
 	}
 
 	@Test

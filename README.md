@@ -425,7 +425,7 @@ url:zjh.hduzjh.cn/HouseKeeper/cash-subItemQuery
 - 查询某一成员账户收支查询
 
 ```
-url:zjh.hduzjh.cn/cash-accountQuery
+url:zjh.hduzjh.cn/HouseKeeper/cash-accountQuery
 接口参数：
 {
     which//String，i为查询收入，否则查询支出
@@ -478,7 +478,7 @@ url:zjh.hduzjh.cn/cash-accountQuery
 - 登陆
 
 ```
-url:zjh.hduzjh.cn/login-login
+url:zjh.hduzjh.cn/HouseKeeper/login-login
 接口参数：
 {
     which//String，m为成员登陆，f为家庭登陆
@@ -493,7 +493,7 @@ url:zjh.hduzjh.cn/login-login
 - 注册
 
 ```
-url:zjh.hduzjh.cn/login-sign
+url:zjh.hduzjh.cn/HouseKeeper/login-sign
 接口参数：
 {
     which//String，m为成员注册，f为家庭注册
@@ -511,7 +511,7 @@ url:zjh.hduzjh.cn/login-sign
 - 删除
 
 ```
-url:zjh.hduzjh.cn/login-delete
+url:zjh.hduzjh.cn/HouseKeeper/login-delete
 接口参数：
 {
     which//String，m为成员删除，f为家庭删除
@@ -525,7 +525,7 @@ url:zjh.hduzjh.cn/login-delete
 - 修改
 
 ```
-url:zjh.hduzjh.cn/login-update
+url:zjh.hduzjh.cn/HouseKeeper/login-update
 接口参数：
 {
     which//String，m为成员修改，f为家庭修改
@@ -544,7 +544,7 @@ url:zjh.hduzjh.cn/login-update
 - 获取某一家庭或成员信息
 
 ```
-url:zjh.hduzjh.cn/login-idGet
+url:zjh.hduzjh.cn/HouseKeeper/login-idGet
 接口参数：
 {
     which//String，m为成员信息获取，f为家庭信息获取
@@ -577,7 +577,7 @@ url:zjh.hduzjh.cn/login-idGet
 - 获取某家庭所有成员
 
 ```
-url:zjh.hduzjh.cn/login-familyGet
+url:zjh.hduzjh.cn/HouseKeeper/login-familyGet
 接口参数：
 {
     id//所属家庭id

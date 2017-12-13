@@ -1,5 +1,6 @@
 package housekeeper.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import housekeeper.entities.Member;
@@ -64,7 +65,7 @@ public interface MemberDao {
 	 * @param id
 	 * @return
 	 */
-	public double sumCashIn(Integer id);
+	public double sumCashIn(Integer id, Date time);
 
 	/**
 	 * 计算某成员总支出
@@ -72,5 +73,5 @@ public interface MemberDao {
 	 * @param id
 	 * @return
 	 */
-	public double sumCashOut(Integer id);
+	public double sumCashOut(Integer id, String time);
 }
